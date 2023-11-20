@@ -6,15 +6,14 @@ import {_styles} from './styles'
 import useDarkMode from "@/shared/hooks/useDarkMode";
 import { normalize } from "@/shared/helpers";
 import { useNavigation } from "@react-navigation/native";
-import { NavigationProps } from "@/shared/routes/stack";
 
-export default function CardProduct({product}: any) {
+export default function CardProduct({product}) {
   const {isDarkMode} = useDarkMode()
   const styles = _styles(isDarkMode)
-  const navigation = useNavigation<NavigationProps>();
+  const navigation = useNavigation();
 
   function navigateTo() {
-    navigation.navigate('detailPlant')
+    navigation.navigate('detailPlant', {product:product})
   }
   return (
     <TouchableOpacity onPress={navigateTo} style={styles.container}>

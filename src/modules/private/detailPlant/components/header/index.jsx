@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import useDarkMode from "@/shared/hooks/useDarkMode";
 import { semantic } from "@/shared/constants/colors";
 
-export default function Header() {
+export default function Header({title}) {
   const {isDarkMode} = useDarkMode()
   const {goBack} = useNavigation()
   return (
@@ -18,11 +18,11 @@ export default function Header() {
       </TouchableOpacity>
 
       <Typography style={styles.title} translate={false}>
-        Variegated snake
+        {title}
       </Typography>
 
       <TouchableOpacity>
-        <Icon icon={like} />
+        {/* <Icon icon={like} /> */}
       </TouchableOpacity>
     </View>
   )

@@ -6,6 +6,7 @@ export const _styles = (isDarkMode: boolean) => StyleSheet.create({
   container: {
     paddingHorizontal: normalize(24),
     flex: 1,
+    paddingBottom: normalize(24)
   },
   containerImage: {
     width: '100%',
