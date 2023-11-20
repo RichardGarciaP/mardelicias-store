@@ -62,7 +62,7 @@ export default function MostPopular() {
   }
   return (
     <View>
-      <Typography style={styles.titleSection}>{"home.most_popular"}</Typography>
+      <Typography style={styles.titleSection}>Productos</Typography>
       <List
         between
         data={MOCKUP_PRODUCTS}

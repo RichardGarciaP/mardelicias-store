@@ -4,7 +4,7 @@ import {semantic} from '@/shared/constants/colors';
 
 export const styles = StyleSheet.create({
   container: {
-    marginTop: normalize(14),
+    marginTop: normalize(24),
     marginLeft: normalize(24),
   },
   divider: {

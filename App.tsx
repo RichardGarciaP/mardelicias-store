@@ -88,7 +88,6 @@ function App(): JSX.Element {
   return (
     <NavigationContainer>
         <Stack.Navigator
-          initialRouteName={'welcome'}
           screenOptions={{headerShown: false}}>
           <Stack.Screen name="tab" component={TabNavigation} />
           {RoutesStack.map(route => {

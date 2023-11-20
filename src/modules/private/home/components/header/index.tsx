@@ -16,29 +16,12 @@ export default function Header() {
       <View style={styles.row}>
         <Image style={styles.avatar} source={{uri: 'https://i.ibb.co/hZqwx78/049-girl-25.png'}} />
         <View>
-          <Typography style={styles.nameUser} translate={false}>Fernando</Typography>
+          <Typography style={styles.nameUser} translate={false}>Bryan</Typography>
           <View style={styles.row}>
             <Icon customStyles={styles.iconLocation} icon={location} />
-            <Typography style={styles.location} translate={false}>San francisco</Typography>
+            <Typography style={styles.location} translate={false}>Manta</Typography>
           </View>
         </View>
-      </View>
-
-      <View style={styles.row}>
-        <TouchableOpacity onPress={() => navigate('notifications')}>
-          {isDarkMode ? (
-            <Icon customStyles={styles.iconSize} icon={homeNotificationsDark} />
-          ) : (
-            <Icon customStyles={styles.iconSize} icon={homeNotifications} />
-          )}
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigate('favorites')}>
-          {isDarkMode ? (
-            <Icon customStyles={styles.iconSize} icon={homeLikeDark} />
-          ) : (
-            <Icon customStyles={styles.iconSize} icon={homeLike} />
-          )}
-        </TouchableOpacity>
       </View>
     </View>
   )

@@ -10,7 +10,7 @@ interface SliderProps {
 export default function SpecialOffers({banners}: SliderProps) {
   return (
     <View style={styles.container}>
-      <Typography style={styles.titleSection}>{"home.special_offers"}</Typography>
+      <Typography style={styles.titleSection}>Anuncios Importantes</Typography>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {banners.map((banner, index) => (
           <View key={index} style={styles.divider}>
