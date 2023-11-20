@@ -19,12 +19,11 @@ export default function CardProduct({product}: any) {
   return (
     <TouchableOpacity onPress={navigateTo} style={styles.container}>
         <View style={styles.containerImage}>
-          <Image style={styles.image} resizeMode="contain" source={{uri: product.image}} />
+          <Image style={styles.image} resizeMode="contain" source={{uri: product.imageUrl}} />
         </View>
 
         <View style={{marginTop: normalize(12)}}>
           <Typography style={styles.name} translate={false}>{product.name}</Typography>
-          <Typography style={styles.category} translate={false}>{product.category}</Typography>
           <Typography style={styles.price} translate={false}>{currencyType} {product.price.toFixed(2)}</Typography>
         </View>
     </TouchableOpacity>
