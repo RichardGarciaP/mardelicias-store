@@ -13,10 +13,10 @@ export default function Header() {
   const {navigate} = useNavigation<NavigationProps>()
   return (
     <View style={styles.container}>
-      <View style={styles.row}>
-        <Image style={styles.avatar} source={{uri: 'https://i.ibb.co/hZqwx78/049-girl-25.png'}} />
+      <View style={styles.wrapper}>
+        <Image style={styles.avatar} source={{uri: 'https://mardelicias-portal.vercel.app/logo.png'}} />
         <View>
-          <Typography style={styles.nameUser} translate={false}>Bryan</Typography>
+          <Typography style={styles.nameUser} translate={false}>Invitado</Typography>
           <View style={styles.row}>
             <Icon customStyles={styles.iconLocation} icon={location} />
             <Typography style={styles.location} translate={false}>Manta</Typography>

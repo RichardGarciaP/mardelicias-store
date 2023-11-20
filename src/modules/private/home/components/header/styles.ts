@@ -10,13 +10,18 @@ export const styles = StyleSheet.create({
     paddingHorizontal: normalize(24)
   },
   avatar: {
-    width: normalize(40),
-    height: normalize(40),
-    marginRight: normalize(12)
+    width: normalize(50),
+    height: normalize(50),
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  wrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flex: 1
   },
   nameUser: {
     fontSize: normalize(16),
