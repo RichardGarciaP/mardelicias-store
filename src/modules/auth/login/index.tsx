@@ -54,7 +54,7 @@ export default function Login() {
     setSubmitting(false);
     await storage.create('user', data.user);
     await storage.create('session', data.session);
-    navigation.navigate('welcome');
+    navigation.navigate('tab');
   };
 
 
@@ -68,7 +68,7 @@ export default function Login() {
         <TitleAuth title={'auth.login.title'} />
         <Formik
           initialValues={{
-            email: 'ruben@gmail.com',
+            email: 'alex@gmail.com',
             password: 'qwerty00',
             submit: '',
           }}
