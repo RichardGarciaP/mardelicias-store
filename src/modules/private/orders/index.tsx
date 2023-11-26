@@ -7,13 +7,14 @@ import {View} from 'react-native';
 import {styles} from './styles';
 import Order from '@/modules/private/orders/components/order';
 import UserValidation from '@/shared/components/user-validation/userValidation';
+import {StoreContext} from '@/context/context';
 
 export default function Orders() {
-  const [hasUser, setHasUser] = React.useState(false);
+  const {user} = React.useContext(StoreContext);
 
   return (
     <>
-      {hasUser ? (
+      {user ? (
         <Wrapper>
           <View style={styles.container}>
             <HeaderWithIcon icon={shoppingBag} title={'orders.title'} />

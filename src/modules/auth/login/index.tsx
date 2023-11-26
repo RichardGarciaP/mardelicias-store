@@ -17,12 +17,14 @@ import {Session, useSupabaseClient} from '@supabase/auth-helpers-react';
 import { UserDTO } from '@/shared/DTO';
 import { signInWithEmail } from '@/shared/helpers/services/login';
 import {storage} from '@/shared/helpers';
+import { StoreContext } from '@/context/context';
 
 
 
 export default function Login() {
   const navigation = useNavigation<NavigationProps>();
   const [isSecureActive, setIsSecureActive] = React.useState(true);
+  const {setUser} = React.useContext(StoreContext);
 
   const validations = Yup.object({
     email: Yup.string()
@@ -54,7 +56,8 @@ export default function Login() {
     setSubmitting(false);
     await storage.create('user', data.user);
     await storage.create('session', data.session);
-    navigation.navigate('tab');
+    setUser(data.user)
+    navigation.push('tab');
   };
 
 

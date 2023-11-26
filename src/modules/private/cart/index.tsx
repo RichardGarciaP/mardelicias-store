@@ -16,13 +16,14 @@ import {NavigationProps} from '@/shared/routes/stack';
 import useDarkMode from '@/shared/hooks/useDarkMode';
 import {semantic} from '@/shared/constants/colors';
 import UserValidation from '@/shared/components/user-validation/userValidation';
+import { StoreContext } from '@/context/context';
 
 export default function Cart() {
   const {isDarkMode} = useDarkMode();
   const {navigate} = useNavigation<NavigationProps>();
   const [openDeleteItem, setOpenDeleteItem] = useState(false);
   const [selectedProductToRemove, setSelectedProductToRemove] = useState({});
-  const [hasUser, setHasUser] = useState(false);
+  const {user} = React.useContext(StoreContext);
   function toggleOpenDeleteItem() {
     setOpenDeleteItem(!openDeleteItem);
   }
@@ -40,7 +41,7 @@ export default function Cart() {
   }
   return (
     <View style={{flex: 1}}>
-      {hasUser ? (
+      {user ? (
         <>
           <Wrapper>
             <View style={{flex: 1, paddingHorizontal: normalize(24)}}>

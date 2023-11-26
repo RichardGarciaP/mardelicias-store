@@ -16,13 +16,13 @@ import {
 import Icon from '@/shared/components/icon';
 import Typography from '@/shared/components/typography';
 import Wrapper from '@/shared/components/wrapper';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, TouchableOpacity, Image} from 'react-native';
 import Section from './components/section';
 import Toggle from '@/shared/components/toggle';
 
 import {styles} from './styles';
-import {normalize} from '@/shared/helpers';
+import {normalize, storage} from '@/shared/helpers';
 import {NavigationProps} from '@/shared/routes/stack';
 import {useNavigation} from '@react-navigation/native';
 import ButtonSheet from '@/shared/components/buttonSheet';
@@ -32,6 +32,7 @@ import ListOptionCard, {
 import {Button} from '@/shared/components/buttons';
 import useDarkMode from '@/shared/hooks/useDarkMode';
 import UserValidation from '@/shared/components/user-validation/userValidation';
+import { StoreContext } from '@/context/context';
 
 const Profile = () => {
   const [toggleDarkMode, setToggleDarkMode] = useState<boolean>(false);
@@ -55,11 +56,12 @@ const Profile = () => {
     navigate('addNewAddress');
   }
 
- 
+  const { user } = React.useContext(StoreContext)
+
 
   return (
     <>
-      {hasUser ? (
+      {user ? (
         <Wrapper>
           <View style={styles.container}>
             <View style={styles.profileText}>
@@ -81,20 +83,16 @@ const Profile = () => {
                 style={{
                   flexDirection: 'row',
                 }}>
-                <Image
-                  style={styles.image}
-                  source={{uri: 'https://i.ibb.co/hZqwx78/049-girl-25.png'}}
-                />
                 <View
                   style={{
                     flexDirection: 'column',
                     justifyContent: 'space-evenly',
                   }}>
                   <Typography style={{fontWeight: '700', fontSize: 16}}>
-                    Username
+                    {`${user.user_metadata.first_name} ${user.user_metadata.last_name}`}
                   </Typography>
                   <Typography style={{fontWeight: '500', fontSize: 14}}>
-                    phone
+                    {user.user_metadata.email}
                   </Typography>
                 </View>
               </View>
@@ -103,16 +101,6 @@ const Profile = () => {
               </TouchableOpacity>
             </View>
 
-            <Section
-              title="profile.general"
-              elements={[
-                {
-                  name: 'profile.voucher',
-                  leftIcon: <Icon icon={vocher} />,
-                  onPress: () => navigate('vouchers'),
-                },
-              ]}
-            />
 
             <Section
               title="profile.account_settings"
@@ -121,24 +109,6 @@ const Profile = () => {
                   name: 'profile.address',
                   leftIcon: <Icon icon={location} />,
                   onPress: () => toggleModal(),
-                },
-                {
-                  name: 'profile.payment_method',
-                  leftIcon: <Icon icon={walletFilled} />,
-                  onPress: () => navigate('payments'),
-                },
-                {
-                  name: 'profile.dark_mode',
-                  leftIcon: <Icon icon={eyeFilled} />,
-                  rightElement: (
-                    <Toggle
-                      isEnabled={toggleDarkMode || isDarkMode}
-                      setIsEnabled={newValue => {
-                        setToggleDarkMode(newValue);
-                        changeColorScheme().catch();
-                      }}
-                    />
-                  ),
                 },
                 {name: 'profile.logout', leftIcon: <Icon icon={logout} />},
               ]}

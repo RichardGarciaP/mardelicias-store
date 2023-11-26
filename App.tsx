@@ -23,6 +23,7 @@ import {storage} from '@/shared/helpers';
 import i18n from 'i18next';
 import {SessionContextProvider} from '@supabase/auth-helpers-react';
 import {supabase} from '@/shared/helpers/services/client';
+import {StoreProvider} from '@/context/context';
 
 const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
@@ -30,39 +31,35 @@ const Tab = createBottomTabNavigator();
 function TabNavigation() {
   const {isDarkMode} = useDarkMode();
   return (
-    <SessionContextProvider supabaseClient={supabase}>
-      <Tab.Navigator screenOptions={{headerShown: false}}>
-        {RoutesTab.map(route => (
-          <Tab.Screen
-            key={route.name}
-            name={route.name}
-            component={route.component}
-            options={{
-              tabBarStyle: {
-                backgroundColor: isDarkMode
-                  ? semantic.background.dark.d500
-                  : semantic.background.white.w500,
-              },
-              tabBarIcon: ({focused}) => {
-                return (
-                  <Icon
-                    customStyles={{
-                      tintColor: focused
-                        ? palette.main.p500
-                        : semantic.text.grey,
-                    }}
-                    icon={route.icon}
-                  />
-                );
-              },
-              tabBarLabel: ({focused}) => {
-                return null;
-              },
-            }}
-          />
-        ))}
-      </Tab.Navigator>
-    </SessionContextProvider>
+    <Tab.Navigator screenOptions={{headerShown: false}}>
+      {RoutesTab.map(route => (
+        <Tab.Screen
+          key={route.name}
+          name={route.name}
+          component={route.component}
+          options={{
+            tabBarStyle: {
+              backgroundColor: isDarkMode
+                ? semantic.background.dark.d500
+                : semantic.background.white.w500,
+            },
+            tabBarIcon: ({focused}) => {
+              return (
+                <Icon
+                  customStyles={{
+                    tintColor: focused ? palette.main.p500 : semantic.text.grey,
+                  }}
+                  icon={route.icon}
+                />
+              );
+            },
+            tabBarLabel: ({focused}) => {
+              return null;
+            },
+          }}
+        />
+      ))}
+    </Tab.Navigator>
   );
 }
 
@@ -81,20 +78,24 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="tab" component={TabNavigation} />
-        {RoutesStack.map(route => {
-          return (
-            <Stack.Screen
-              key={route.path}
-              name={route.path}
-              component={route.component}
-            />
-          );
-        })}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <StoreProvider>
+      <SessionContextProvider supabaseClient={supabase}>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{headerShown: false}}>
+            <Stack.Screen name="tab" component={TabNavigation} />
+            {RoutesStack.map(route => {
+              return (
+                <Stack.Screen
+                  key={route.path}
+                  name={route.path}
+                  component={route.component}
+                />
+              );
+            })}
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SessionContextProvider>
+    </StoreProvider>
   );
 }
 
