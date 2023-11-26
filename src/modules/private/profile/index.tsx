@@ -33,6 +33,7 @@ import {Button} from '@/shared/components/buttons';
 import useDarkMode from '@/shared/hooks/useDarkMode';
 import UserValidation from '@/shared/components/user-validation/userValidation';
 import { StoreContext } from '@/context/context';
+import { signOut } from '@/shared/helpers/services/login';
 
 const Profile = () => {
   const [toggleDarkMode, setToggleDarkMode] = useState<boolean>(false);
@@ -41,8 +42,10 @@ const Profile = () => {
   const [openModal, setOpenModal] = useState(false);
   const [addressSelected, setAddressSelected] = useState<OptionCardOptions>();
   const {isDarkMode, changeColorScheme} = useDarkMode();
+  const { user, setUser } = React.useContext(StoreContext)
 
-  const [hasUser, setHasUser] = React.useState(false);
+  console.log(user)
+
 
   function onSelectAddress(option: OptionCardOptions) {
     setAddressSelected(option);
@@ -56,7 +59,12 @@ const Profile = () => {
     navigate('addNewAddress');
   }
 
-  const { user } = React.useContext(StoreContext)
+  const handleLogOut = async () => {
+    await signOut();
+    await storage.delete('user');
+    setUser(undefined)
+  }
+
 
 
   return (
@@ -89,50 +97,36 @@ const Profile = () => {
                     justifyContent: 'space-evenly',
                   }}>
                   <Typography style={{fontWeight: '700', fontSize: 16}}>
-                    {`${user.user_metadata.first_name} ${user.user_metadata.last_name}`}
+                    {`${user.user_metadata?.first_name} ${user.user_metadata.last_name}`}
                   </Typography>
                   <Typography style={{fontWeight: '500', fontSize: 14}}>
-                    {user.user_metadata.email}
+                    {user.user_metadata.dni}
                   </Typography>
+                  <Typography style={{fontWeight: '500', fontSize: 14}}>
+                    {user.phone}
+                  </Typography>
+                  <Typography style={{fontWeight: '500', fontSize: 14}}>
+                    {user.email}
+                  </Typography>
+                  <Typography style={{fontWeight: '500', fontSize: 14}}>
+                    {user.user_metadata.direction}
+                  </Typography>
+                  <Typography style={{fontWeight: '500', fontSize: 14}}>
+                    {user.user_metadata.direction_detail}
+                  </Typography>
+                  
                 </View>
               </View>
-              <TouchableOpacity onPress={() => navigate('editProfile')}>
+              {/* <TouchableOpacity onPress={() => navigate('editProfile')}>
                 <Icon icon={edit} />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
 
 
             <Section
-              title="profile.account_settings"
+              title="Configuración de la app"
               elements={[
-                {
-                  name: 'profile.address',
-                  leftIcon: <Icon icon={location} />,
-                  onPress: () => toggleModal(),
-                },
-                {name: 'profile.logout', leftIcon: <Icon icon={logout} />},
-              ]}
-            />
-
-            <Section
-              title="profile.app_settings"
-              elements={[
-                {
-                  name: 'general.language',
-                  leftIcon: <Icon icon={order} />,
-                  onPress: () => navigate('language'),
-                },
-              ]}
-            />
-
-            <Section
-              title="profile.support"
-              elements={[
-                {
-                  name: 'profile.help_center',
-                  leftIcon: <Icon icon={help} />,
-                  onPress: () => navigate('chats'),
-                },
+                {name: "Cierra sesión", leftIcon: <Icon icon={logout} />, onPress: () => handleLogOut() },
               ]}
             />
 
