@@ -12,6 +12,12 @@ export interface CategoryDTO {
   active?: boolean | undefined
 }
 
+export interface UserDTO {
+  email: string;
+  password: string;
+  submit: string;
+}
+
 export interface DeliveryOption {
   description: string
   name: string

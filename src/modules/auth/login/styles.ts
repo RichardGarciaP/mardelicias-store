@@ -28,4 +28,7 @@ export const styles = StyleSheet.create({
   forgot: {
     fontWeight: '700',
   },
+  textError: {
+    color: 'red',
+  },
 })

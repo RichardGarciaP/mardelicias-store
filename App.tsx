@@ -29,6 +29,9 @@ import useDarkMode from "@/shared/hooks/useDarkMode";
 import useEffectOnce from "@/shared/hooks/useEffectOnce";
 import { storage } from "@/shared/helpers";
 import i18n from "i18next";
+import {SessionContextProvider} from '@supabase/auth-helpers-react';
+import { supabase } from "@/shared/helpers/services/client";
+
 
 const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
@@ -36,7 +39,8 @@ const Tab = createBottomTabNavigator();
 function TabNavigation() {
   const {isDarkMode} = useDarkMode()
   return (
-    <Tab.Navigator screenOptions={{headerShown: false}}>
+    <SessionContextProvider supabaseClient={supabase}>
+          <Tab.Navigator screenOptions={{headerShown: false}}>
       {RoutesTab.map(route => (
         <Tab.Screen
           key={route.name}
@@ -65,6 +69,8 @@ function TabNavigation() {
         />
       ))}
     </Tab.Navigator>
+    </SessionContextProvider>
+
   );
 }
 
