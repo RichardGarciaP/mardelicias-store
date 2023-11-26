@@ -7,27 +7,42 @@ import { Button } from "@/shared/components/buttons";
 import { styles } from "./styles";
 import TitleAuth from "@/shared/components/titleAuth";
 import Icon from "@/shared/components/icon";
-import { eyeOff, lock, mail, user } from "@/shared/assets/icons";
+import { eyeOff, lock, mail, user, location } from "@/shared/assets/icons";
 
 export default function CreateAccount() {
   return (
     <Wrapper>
       <View style={styles.container}>
-        <TitleAuth title={'auth.create_account.title'} />
+        <TitleAuth title="Crea tu cuenta" />
 
         <View style={styles.form}>
           <View style={styles.formControl}>
             <Input
               leftIcon={<Icon icon={user} />}
-              label="general.full_name"
-              placeholder="general.typing_name"
+              label="Nombres"
+              placeholder="Nombres"
+            />
+          </View>
+          <View style={styles.formControl}>
+            <Input
+              leftIcon={<Icon icon={user} />}
+              label="Apellidos"
+              placeholder="Apellidos"
             />
           </View>
           <View style={styles.formControl}>
             <Input
               leftIcon={<Icon icon={mail} />}
-              label="general.email"
-              placeholder="dev@soadtech.io"
+              label="Correo Electrónico"
+              placeholder="Correo Electrónico"
+            />
+          </View>
+          <View style={styles.formControl}>
+            <Input
+              leftIcon={<Icon icon={location} />}
+              label="Dirección"
+              placeholder="Dirección"
+              multiline
             />
           </View>
           <View style={styles.formControl}>
@@ -35,18 +50,14 @@ export default function CreateAccount() {
               leftIcon={<Icon icon={lock} />}
               rightIcon={<Icon icon={eyeOff} />}
               secureTextEntry={true}
-              label="general.password"
-              placeholder="general.typing_password"
+              label="Contraseña"
+              placeholder="contraseña"
             />
           </View>
         </View>
 
         <View style={styles.formControl}>
-          <Button title={"auth.sign_up"} />
-        </View>
-        <View style={styles.containerLink}>
-          <Typography style={styles.alreadyAccount}>{"auth.create_account.already_account"}</Typography>
-          <Typography style={styles.link}>{"auth.sign_in"}</Typography>
+          <Button title="Registrar" />
         </View>
       </View>
     </Wrapper>
