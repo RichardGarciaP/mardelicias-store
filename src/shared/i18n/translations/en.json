@@ -46,10 +46,12 @@
   },
   "orders": {
     "title": "My Orders",
-    "progress": "On Progress",
-    "success": "Success",
-    "canceled": "Canceled",
-    "track_order": "Track Order"
+    "processing":"Processing",
+    "progress":"Sended",
+    "success": "Completed",
+    "track_order": "Track Order",
+    "completed": "Set to dispached",
+    "locate":"See location"
   },
   "tracking": {
     "title": "Tracking",

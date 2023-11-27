@@ -1,15 +1,14 @@
-
 export interface BannerDTO {
-  image: string
-  name: string
-  state: string
-  description: string
+  image: string;
+  name: string;
+  state: string;
+  description: string;
 }
 export interface CategoryDTO {
-  id: string
-  name: string
-  state: string
-  active?: boolean | undefined
+  id: string;
+  name: string;
+  state: string;
+  active?: boolean | undefined;
 }
 
 export interface UserDTO {
@@ -19,51 +18,50 @@ export interface UserDTO {
 }
 
 export interface DeliveryOption {
-  description: string
-  name: string
-  state: string
+  description: string;
+  name: string;
+  state: string;
 }
 
 export interface ProductDTO {
   id: string;
   category: string;
-  description?: string
-  discount?: string
+  description?: string;
+  discount?: string;
   image: string;
-  name: string
+  name: string;
   price: number;
-  state?: string
+  state?: string;
   // variantId: VariantDTO[]
   cant?: number;
-  size?: string
+  size?: string;
 }
 
 export interface VariantDTO {
-  name: string
-  values: ValuesVariantDTO[]
+  name: string;
+  values: ValuesVariantDTO[];
 }
 
 export interface ValuesVariantDTO {
-  value: string
-  price: string
-  active: boolean
+  value: string;
+  price: string;
+  active: boolean;
 }
 
-
 export interface VariantResponseDTO {
-  name: string
-  valuesId: string[]
+  name: string;
+  valuesId: string[];
 }
 
 export interface ProductResponseDTO {
   category: string;
-  description: string
-  discount: string
+  description: string;
+  discount: string;
   image: string;
-  name: string
+  name: string;
   price: string;
-  state: string
-  variantId: string[]
+  state: string;
+  variantId: string[];
 }
 
 export interface AddressDTO {
@@ -74,20 +72,52 @@ export interface AddressDTO {
 
 export interface OrderDTO {
   id: string;
-  address: AddressDTO
-  typeDelivery: string
-  deliveryOptions: string
-  state: number
-  clientName: string
-  clientEmail: string
-  clientPhone: string
-  products: ProductDTO[]
-  paymentMethods: string
-  order: number
+  address: AddressDTO;
+  typeDelivery: string;
+  deliveryOptions: string;
+  state: number;
+  clientName: string;
+  clientEmail: string;
+  clientPhone: string;
+  products: ProductDTO[];
+  paymentMethods: string;
+  order: number;
 }
 
 export interface NotificationDTO {
   title: string;
-  description: string
-  state: string
+  description: string;
+  state: string;
+}
+
+export interface Order {
+  id: number;
+  created_at: Date;
+  products: Product[];
+  user_id: string;
+  payment_method: string;
+  total: number;
+  voucher_url: string;
+  status: string;
+  driver_user: string;
+  users?: Client;
+  orders_driver_user_fkey?: Client;
+}
+
+export interface Product {
+  id: number;
+  qty: number;
+  name: string;
+  price: string;
+  stock: number;
+  imageUrl: string;
+  created_at: Date;
+  description: string;
+}
+
+export interface Client {
+  first_name: string;
+  last_name: string;
+  direction: string;
+  direction_detail: string;
 }

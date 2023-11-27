@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Wrapper from '@/shared/components/wrapper';
 import HeaderWithIcon from '@/shared/components/headerBack';
 import {shoppingBag} from '@/shared/assets/icons';
@@ -8,39 +8,26 @@ import {styles} from './styles';
 import Order from '@/modules/private/orders/components/order';
 import UserValidation from '@/shared/components/user-validation/userValidation';
 import {StoreContext} from '@/context/context';
+import useOrders from '@/shared/hooks/useOrders';
+import {TAB_LIST} from '@/shared/constants/global';
 
 export default function Orders() {
   const {user} = React.useContext(StoreContext);
 
+  const [currentTab, setCurrentTab] = useState<string>(TAB_LIST[0].id);
+  const {data, error, isLoading, isValidating} = useOrders(
+    currentTab ? currentTab : TAB_LIST[0].id,
+  );
   return (
     <>
       {user ? (
-        <Wrapper>
+        <Wrapper loading={isLoading || isValidating}>
           <View style={styles.container}>
             <HeaderWithIcon icon={shoppingBag} title={'orders.title'} />
-            <TopNavigation />
-            <Order
-              product={{
-                id: '1',
-                image: 'https://i.ibb.co/5Tk0vKM/Img-1.png',
-                name: 'Variegated snake',
-                category: 'Indoor',
-                price: 20.0,
-                size: 'Medium',
-                cant: 1,
-              }}
-            />
-            <Order
-              product={{
-                id: '3',
-                image: 'https://i.ibb.co/H2HKBWK/Img-3.png',
-                name: 'Strelitzia Nicolai',
-                category: 'Indoor',
-                price: 25.0,
-                size: 'Medium',
-                cant: 2,
-              }}
-            />
+            <TopNavigation setCurrentTab={setCurrentTab} />
+            {data?.map(order => (
+              <Order order={order} key={`product-${order.id}`} />
+            ))}
           </View>
         </Wrapper>
       ) : (
