@@ -24,6 +24,7 @@ export default function Cart() {
   const [openDeleteItem, setOpenDeleteItem] = useState(false);
   const [selectedProductToRemove, setSelectedProductToRemove] = useState({});
   const {user, cart} = React.useContext(StoreContext);
+  console.log('cart',cart.lenght)
   function toggleOpenDeleteItem() {
     setOpenDeleteItem(!openDeleteItem);
   }

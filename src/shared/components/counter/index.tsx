@@ -12,21 +12,24 @@ export enum TypeChange {
 
 interface CounterProps {
   onChange: (value: number, typeOperation: number) => void
-  cant?: number
+  cant?: number,
+  setQuantity?: (value:number) => void
 }
 
-export default function Counter({onChange, cant = 1}: CounterProps) {
+export default function Counter({onChange, cant = 1, setQuantity}: CounterProps) {
   const [count, setCounter] = useState(cant);
   function handleChange(type: number) {
     if (type === TypeChange.minus) {
       if (count > 1) {
         onChange(count - 1, TypeChange.minus)
         setCounter(prevState => prevState - 1);
+        setQuantity(count - 1);
       }
       return;
     }
     onChange(count + 1, TypeChange.plus)
     setCounter(prevState => prevState + 1);
+    setQuantity(count + 1);
   }
   return (
     <View style={styles.container}>

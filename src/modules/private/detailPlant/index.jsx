@@ -11,12 +11,21 @@ import Counter from "@/shared/components/counter";
 import { currencyType } from "@/shared/constants/global";
 import { Button } from "@/shared/components/buttons";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { StoreContext } from '@/context/context';
 
 export default function DetailPlant({route}) {
   const {navigate} = useNavigation()
   const {isDarkMode} = useDarkMode()
   const {product} = route.params;
   const styles = _styles(isDarkMode)
+  const [quantity,setQuantity] = React.useState(1)
+  const {cart,setCart} = React.useContext(StoreContext)
+
+  const addToCart = () => {
+    setCart([...cart,{...product,qty:quantity }]);
+    navigate('tab')
+  }
+  
   return (
     <Wrapper>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
@@ -39,16 +48,16 @@ export default function DetailPlant({route}) {
 
         <View style={styles.containerName}>
           <Typography style={styles.quantity}>Cantidad</Typography>
-          <Counter onChange={() => console.log('juga')} />
+          <Counter onChange={() => {}} setQuantity={setQuantity} />
         </View>
 
         <View style={styles.containerName}>
           <View style={{flex: 1,}}>
             <Typography style={styles.price}>Precio</Typography>
-            <Typography style={styles.total} translate={false}>{currencyType} 20.00</Typography>
+            <Typography style={styles.total} translate={false}>{currencyType}{(product.price * quantity).toFixed(2)}</Typography>
           </View>
           <View style={{flex: 1}}>
-            <Button leftIcon={<Icon customStyles={{tintColor: 'white'}} icon={shoppingBag} />} title="Agregar al carrito" />
+            <Button onPress={addToCart} leftIcon={<Icon customStyles={{tintColor: 'white'}} icon={shoppingBag} />} title="Agregar al carrito" />
           </View>
         </View>
       </ScrollView>
