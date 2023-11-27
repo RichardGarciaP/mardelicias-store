@@ -44,9 +44,6 @@ const Profile = () => {
   const {isDarkMode, changeColorScheme} = useDarkMode();
   const { user, setUser } = React.useContext(StoreContext)
 
-  console.log(user)
-
-
   function onSelectAddress(option: OptionCardOptions) {
     setAddressSelected(option);
   }
