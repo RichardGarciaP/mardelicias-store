@@ -9,6 +9,7 @@ export const StoreProvider = ({ children }) => {
     const [orders, setOrders] = React.useState([]);
     const [showLoader,setShowLoader] = React.useState(false)
     const [user,setUser] = React.useState(undefined)
+    const [cart,setCart] = React.useState([])
 
     
     const getLocalUser = async () => {
@@ -28,7 +29,9 @@ export const StoreProvider = ({ children }) => {
           showLoader,
           setShowLoader,
           user,
-          setUser
+          setUser,
+          cart,
+          setCart
         }}
       >
         {children}
