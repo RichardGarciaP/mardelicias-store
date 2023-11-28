@@ -18,8 +18,8 @@ export const styles = StyleSheet.create({
     marginVertical: normalize(20),
   },
   image: {
-    width: normalize(60),
-    height: normalize(60),
-    marginRight: normalize(12),
+    width: normalize(70),
+    height: normalize(70),
+    marginRight: normalize(20),
   },
 });
