@@ -1,17 +1,17 @@
-import { StyleSheet } from "react-native";
-import { normalize } from "@/shared/helpers";
-import { palette } from "@/shared/constants/colors";
+import {StyleSheet} from 'react-native';
+import {normalize} from '@/shared/helpers';
+import {palette} from '@/shared/constants/colors';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: normalize(24)
+    paddingHorizontal: normalize(24),
   },
   form: {
-    marginTop: normalize(32)
+    marginTop: normalize(32),
   },
   formControl: {
-    marginBottom: normalize(24)
+    marginBottom: normalize(24),
   },
   containerLink: {
     flexDirection: 'row',
@@ -19,12 +19,15 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   alreadyAccount: {
-    fontSize: normalize(16)
+    fontSize: normalize(16),
   },
   link: {
     marginLeft: normalize(6),
     color: palette.main.p500,
     fontWeight: '700',
-    fontSize: normalize(16)
-  }
-})
+    fontSize: normalize(16),
+  },
+  textError: {
+    color: 'red',
+  },
+});

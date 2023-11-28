@@ -1,6 +1,10 @@
 export const currencyType = '$';
 export const activeOpacity = 0.8;
 
+export const USERS_TYPE_DEFINITIONS = {
+  CLIENT: 'cliente',
+};
+
 export const ORDER_STATUS_DEFINITIONS = {
   PROCESSING: 'procesando',
   DISPATCH: 'enviado',
@@ -24,3 +28,8 @@ export const TAB_LIST = [
     active: false,
   },
 ];
+
+export const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
+export const dniRegExp = /^\d{10}$/;

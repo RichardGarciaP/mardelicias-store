@@ -121,3 +121,17 @@ export interface Client {
   direction: string;
   direction_detail: string;
 }
+
+export interface NewUser {
+  city: string;
+  direction: string;
+  direction_detail: string;
+  dni: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  password: string;
+  phone: string;
+  role: string;
+  submit: string;
+}
