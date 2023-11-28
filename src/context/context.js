@@ -14,12 +14,24 @@ export const StoreProvider = ({ children }) => {
     
     const getLocalUser = async () => {
         const user = await storage.get('user')
+        const localCart = await storage.get('cart')
+        console.log('---',localCart)
+        setCart(localCart)
         setUser(user)
     }
 
     React.useEffect(() => {
         getLocalUser()
     },[])
+
+    const updateLocalCart = async () => {
+        await storage.create('cart',cart)
+    }
+
+
+    React.useEffect(()=>{
+        updateLocalCart()
+    },[cart])
   
     return (
       <StoreContext.Provider
