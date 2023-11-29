@@ -83,7 +83,7 @@ export default function CreateAccount() {
   };
 
   return (
-    <Wrapper>
+    <Wrapper backgroundColor="white">
       <Formik
         initialValues={{
           dni: '',

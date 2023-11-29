@@ -15,6 +15,7 @@ interface WrapperProps {
   loading?: boolean;
   titleLoader?: string;
   isCentered?: boolean;
+  backgroundColor?: string;
 }
 export default function Wrapper({
   children,
@@ -23,6 +24,7 @@ export default function Wrapper({
   loading,
   titleLoader,
   isCentered = false,
+  backgroundColor = '#F1EDE7',
 }: WrapperProps) {
   const {isDarkMode} = useDarkMode();
   const animationScale = useRef(new Animated.Value(1)).current;
@@ -57,7 +59,7 @@ export default function Wrapper({
     <View
       style={{
         flex: 1,
-        backgroundColor: '#FFF8F2',
+        backgroundColor,
       }}>
       <OverlayLoader loading={loading} title={titleLoader}>
         <Animated.View
