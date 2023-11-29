@@ -6,10 +6,6 @@
  */
 
 import React, {useState} from 'react';
-import type {PropsWithChildren} from 'react';
-import {ScrollView, StyleSheet, useColorScheme, View} from 'react-native';
-
-import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import RoutesStack, {RootStackParamList} from '@/shared/routes/stack';
 import RoutesTab from '@/shared/routes/tab';
@@ -24,12 +20,18 @@ import i18n from 'i18next';
 import {SessionContextProvider} from '@supabase/auth-helpers-react';
 import {supabase} from '@/shared/helpers/services/client';
 import {StoreProvider} from '@/context/context';
+import SplashScreen from 'react-native-splash-screen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
 
 function TabNavigation() {
   const {isDarkMode} = useDarkMode();
+
+  useEffectOnce(() => {
+    SplashScreen.hide();
+  }, []);
+
   return (
     <Tab.Navigator screenOptions={{headerShown: false}}>
       {RoutesTab.map(route => (
