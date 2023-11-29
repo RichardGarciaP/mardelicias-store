@@ -5,7 +5,6 @@ import {semantic} from '@/shared/constants/colors';
 export const styles = StyleSheet.create({
   container: {
     marginTop: normalize(24),
-    marginLeft: normalize(24),
   },
   divider: {
     marginRight: normalize(10),
@@ -16,7 +15,7 @@ export const styles = StyleSheet.create({
   image: {
     height: normalize(132),
     width: normalize(272),
-    borderRadius: normalize(12)
+    borderRadius: normalize(12),
   },
   pagination: {
     flexDirection: 'row',
@@ -26,7 +25,8 @@ export const styles = StyleSheet.create({
   },
   titleSection: {
     fontWeight: '700',
-    marginBottom: normalize(24)
+    marginBottom: normalize(24),
+    fontSize: 20,
   },
   containerBanner: {
     position: 'relative',
@@ -44,12 +44,12 @@ export const styles = StyleSheet.create({
   containerInfo: {
     position: 'absolute',
     left: normalize(6),
-    top: normalize(20)
+    top: normalize(20),
   },
   title: {
     color: semantic.text.white,
     fontWeight: '700',
-    fontSize: normalize(18)
+    fontSize: normalize(18),
   },
   description: {
     marginTop: normalize(7),

@@ -13,12 +13,12 @@ interface AnyListProps {
 export default function List({data, rows, renderItem, between}: AnyListProps) {
   const styles = _styles(between);
   return (
-    <>
+    <View>
       {createRows(data, rows).map((chunk, index) => (
         <View key={index} style={styles.containerList}>
           {chunk.map((item, innerIndex) => renderItem(item, innerIndex))}
         </View>
       ))}
-    </>
+    </View>
   );
 }

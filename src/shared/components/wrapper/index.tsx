@@ -28,7 +28,7 @@ export default function Wrapper({
     <View
       style={{
         flex: 1,
-        backgroundColor: isDarkMode ? semantic.background.dark.d500 : 'white',
+        backgroundColor: '#FFF8F2',
       }}>
       <OverlayLoader loading={loading} title={titleLoader} />
       <CustomStatusBar

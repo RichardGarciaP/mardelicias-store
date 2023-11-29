@@ -135,3 +135,13 @@ export interface NewUser {
   role: string;
   submit: string;
 }
+
+export interface ProductsStore {
+  created_at: Date;
+  description: string;
+  id: number;
+  imageUrl: string;
+  name: string;
+  price: number;
+  stock: number;
+}

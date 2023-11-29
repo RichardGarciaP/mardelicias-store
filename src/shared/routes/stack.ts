@@ -1,7 +1,7 @@
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-import {CategoryDTO, OrderDTO, ProductDTO} from '@/shared/DTO';
+import {ProductsStore} from '@/shared/DTO';
 import Login from '@/modules/auth/login';
 import CreateAccount from '@/modules/auth/createAccount';
 import EnterOtp from '@/modules/auth/enterOtp';
@@ -35,7 +35,7 @@ export type RootStackParamList = {
   enterNewPassword: undefined;
   forgotPassword: undefined;
   welcome: undefined;
-  detailPlant: undefined;
+  detailPlant: {product: ProductsStore};
   plantList: undefined;
   favorites: undefined;
   notifications: undefined;
