@@ -1,11 +1,11 @@
 import React from 'react';
 import {ScrollView, View, TouchableOpacity, Image} from 'react-native';
 import {styles} from './styles';
-import { BannerDTO } from "@/shared/DTO";
-import Typography from "@/shared/components/typography";
+import {BannerDTO} from '@/shared/DTO';
+import Typography from '@/shared/components/typography';
 
 interface SliderProps {
-  banners: BannerDTO[]
+  banners: BannerDTO[];
 }
 export default function SpecialOffers({banners}: SliderProps) {
   return (
@@ -14,15 +14,16 @@ export default function SpecialOffers({banners}: SliderProps) {
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {banners.map((banner, index) => (
           <View key={index} style={styles.divider}>
-            <TouchableOpacity style={styles.containerBanner}>
-              <Image
-                style={styles.image}
-                source={{uri: banner.image}}
-              />
+            <TouchableOpacity style={styles.containerBanner} activeOpacity={1}>
+              <Image style={styles.image} source={{uri: banner.image}} />
               <View style={styles.overlay} />
               <View style={styles.containerInfo}>
-                <Typography style={styles.title} translate={false}>{banner.name}</Typography>
-                <Typography style={styles.description} translate={false}>{banner.description}</Typography>
+                <Typography style={styles.title} translate={false}>
+                  {banner.name}
+                </Typography>
+                <Typography style={styles.description} translate={false}>
+                  {banner.description}
+                </Typography>
               </View>
             </TouchableOpacity>
           </View>

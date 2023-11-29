@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { semantic } from "@/shared/constants/colors";
+import {semantic} from '@/shared/constants/colors';
 
 export const _styles = (height: number, loading: boolean | undefined) =>
   StyleSheet.create({
@@ -21,5 +21,6 @@ export const _styles = (height: number, loading: boolean | undefined) =>
       fontWeight: 'bold',
       textAlign: 'center',
       fontStyle: 'italic',
+      marginTop: 20,
     },
   });

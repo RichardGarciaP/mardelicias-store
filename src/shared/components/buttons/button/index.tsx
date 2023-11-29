@@ -29,6 +29,7 @@ export default function Button({
     <TouchableOpacity
       disabled={disabled}
       onPress={onPress}
+      activeOpacity={0.8}
       style={styles.container}>
       {leftIcon && leftIcon}
       {loading ? (

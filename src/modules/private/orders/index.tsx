@@ -35,14 +35,21 @@ export default function Orders() {
               <Order order={order} key={`product-${order.id}`} />
             ))}
             {!isLoading && !isValidating && data?.length === 0 && (
-              <Image
-                source={require('@/shared/assets/icons/no-orders.png')}
+              <View
                 style={{
-                  width: Dimensions.get('screen').width - 20,
-                  height: 350,
-                  opacity: 0.25,
-                }}
-              />
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image
+                  source={require('@/shared/assets/icons/no-orders.png')}
+                  style={{
+                    width: Dimensions.get('screen').width - 20,
+                    height: 350,
+                    opacity: 0.25,
+                  }}
+                />
+              </View>
             )}
           </View>
         </Wrapper>

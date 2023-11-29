@@ -12,4 +12,14 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     marginLeft: normalize(10),
   },
+  logoContainer: {
+    width: normalize(150),
+    height: normalize(150),
+    alignSelf: 'center',
+  },
+  logoLoader: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
 });
