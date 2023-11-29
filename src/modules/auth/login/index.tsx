@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity, Image, Text} from 'react-native';
 import {styles} from './styles';
 import TitleAuth from '@/shared/components/titleAuth';
 import Input from '@/shared/components/input';
@@ -14,12 +14,11 @@ import {NavigationProps} from '@/shared/routes/stack';
 import * as Yup from 'yup';
 import {Formik, FormikHelpers, FormikProps} from 'formik';
 import {Session, useSupabaseClient} from '@supabase/auth-helpers-react';
-import { UserDTO } from '@/shared/DTO';
-import { signInWithEmail } from '@/shared/helpers/services/login';
-import {storage} from '@/shared/helpers';
-import { StoreContext } from '@/context/context';
-
-
+import {UserDTO} from '@/shared/DTO';
+import {signInWithEmail} from '@/shared/helpers/services/login';
+import {normalize, storage} from '@/shared/helpers';
+import {StoreContext} from '@/context/context';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 export default function Login() {
   const navigation = useNavigation<NavigationProps>();
@@ -56,19 +55,24 @@ export default function Login() {
     setSubmitting(false);
     await storage.create('user', data.user);
     await storage.create('session', data.session);
-    setUser(data.user)
+    setUser(data.user);
     navigation.push('tab');
   };
 
-
-  function doLogin() {
-    // @ts-ignore
-    navigation.navigate('tab');
-  }
+  const navigateToSignup = () => {
+    navigation.navigate('createAccount');
+  };
   return (
-    <Wrapper>
-      <View style={styles.container}>
-        <TitleAuth title={'auth.login.title'} />
+    <View style={styles.wrapper}>
+      <View style={{height: normalize(32)}} />
+      <TitleAuth title={'Regresar'} />
+      <View>
+        <View style={styles.imageWrapper}>
+          <Image
+            style={styles.logo}
+            source={require('@/shared/assets/icons/mardelicias.png')}
+          />
+        </View>
         <Formik
           initialValues={{
             email: 'alex@gmail.com',
@@ -142,6 +146,12 @@ export default function Login() {
           )}
         </Formik>
       </View>
-    </Wrapper>
+
+      <View style={styles.signUp}>
+        <TouchableWithoutFeedback onPress={navigateToSignup}>
+          <Text>¿No tienes cuenta? Registrate</Text>
+        </TouchableWithoutFeedback>
+      </View>
+    </View>
   );
 }

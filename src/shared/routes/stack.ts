@@ -23,11 +23,12 @@ import Tracking from '@/modules/private/orders/sections/tracking';
 import EReceipt from '@/modules/private/orders/sections/eReceipt';
 
 import NewAddress from '@/modules/private/profile/sections/newAddress';
-import Language from "@/modules/private/profile/sections/language";
-import Conversation from "@/modules/private/conversation";
-import Chats from "@/modules/private/chats";
+import Language from '@/modules/private/profile/sections/language';
+import Conversation from '@/modules/private/conversation';
+import Chats from '@/modules/private/chats';
 
 export type RootStackParamList = {
+  tab: undefined;
   login: undefined;
   createAccount: undefined;
   enterOtp: undefined;

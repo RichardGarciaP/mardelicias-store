@@ -5,9 +5,10 @@ export const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   title: {
-    fontSize: normalize(32),
+    fontSize: normalize(16),
     fontWeight: '700',
     marginLeft: normalize(10),
   },

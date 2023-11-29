@@ -13,6 +13,7 @@ interface WrapperProps {
   barStyle?: StatusBarStyle;
   loading?: boolean;
   titleLoader?: string;
+  isCentered?: boolean;
 }
 export default function Wrapper({
   children,
@@ -20,6 +21,7 @@ export default function Wrapper({
   barStyle,
   loading,
   titleLoader,
+  isCentered = false,
 }: WrapperProps) {
   const {isDarkMode} = useDarkMode();
   return (

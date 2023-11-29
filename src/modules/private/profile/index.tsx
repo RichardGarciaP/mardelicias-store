@@ -34,6 +34,7 @@ import useDarkMode from '@/shared/hooks/useDarkMode';
 import UserValidation from '@/shared/components/user-validation/userValidation';
 import {StoreContext} from '@/context/context';
 import {signOut} from '@/shared/helpers/services/login';
+import Login from '@/modules/auth/login';
 
 const Profile = () => {
   const [toggleDarkMode, setToggleDarkMode] = useState<boolean>(false);
@@ -97,7 +98,7 @@ const Profile = () => {
                 <View
                   style={{
                     flexDirection: 'column',
-                    justifyContent: 'space-evenly'            
+                    justifyContent: 'space-evenly',
                   }}>
                   <Typography style={{fontWeight: '700', fontSize: 16}}>
                     Username
@@ -165,7 +166,7 @@ const Profile = () => {
           </View>
         </Wrapper>
       ) : (
-        <UserValidation />
+        <Login />
       )}
     </>
   );

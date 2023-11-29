@@ -109,7 +109,7 @@ export default function CreateAccount() {
           values,
         }: FormikProps<NewUser>) => (
           <View style={styles.container}>
-            <TitleAuth title="Crea tu cuenta" />
+            <TitleAuth title="Regresar" />
 
             <View style={styles.form}>
               <View style={styles.formControl}>

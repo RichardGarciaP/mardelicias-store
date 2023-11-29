@@ -9,6 +9,7 @@ import useDarkMode from '@/shared/hooks/useDarkMode';
 import {semantic} from '@/shared/constants/colors';
 import {normalize} from '@/shared/helpers';
 import {NavigationProps} from '@/shared/routes/stack';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 interface TitleAuthProps {
   title?: string;
@@ -21,18 +22,20 @@ export default function TitleAuth({title, icon}: TitleAuthProps) {
     tintColor: isDarkMode ? semantic.background.white.w500 : semantic.text.grey,
   };
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => goBack()}>
-        <Icon
-          customStyles={{
-            ...stylesIcon,
-            width: normalize(25),
-            height: normalize(25),
-          }}
-          icon={icon ? icon : arrowBack}
-        />
-      </TouchableOpacity>
-      {title && <Typography style={styles.title}>{title}</Typography>}
-    </View>
+    <SafeAreaView>
+      <View style={styles.container}>
+        <TouchableOpacity onPress={() => goBack()}>
+          <Icon
+            customStyles={{
+              ...stylesIcon,
+              width: normalize(25),
+              height: normalize(25),
+            }}
+            icon={icon ? icon : arrowBack}
+          />
+        </TouchableOpacity>
+        {title && <Typography style={styles.title}>{title}</Typography>}
+      </View>
+    </SafeAreaView>
   );
 }

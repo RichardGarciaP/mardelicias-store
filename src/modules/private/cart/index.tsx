@@ -15,8 +15,8 @@ import {useNavigation} from '@react-navigation/native';
 import {NavigationProps} from '@/shared/routes/stack';
 import useDarkMode from '@/shared/hooks/useDarkMode';
 import {semantic} from '@/shared/constants/colors';
-import UserValidation from '@/shared/components/user-validation/userValidation';
 import {StoreContext} from '@/context/context';
+import Login from '@/modules/auth/login';
 
 export default function Cart() {
   const {isDarkMode} = useDarkMode();
@@ -24,7 +24,7 @@ export default function Cart() {
   const [openDeleteItem, setOpenDeleteItem] = useState(false);
   const [selectedProductToRemove, setSelectedProductToRemove] = useState({});
   const {user, cart} = React.useContext(StoreContext);
-  console.log('local cars',cart)
+  console.log('local cars', cart);
   function toggleOpenDeleteItem() {
     setOpenDeleteItem(!openDeleteItem);
   }
@@ -105,8 +105,13 @@ export default function Cart() {
             </>
           ) : (
             <Wrapper>
-              <View style={{flex: 1, paddingHorizontal: normalize(24),justifyContent: 'center'}}>
-                <Typography style={{fontSize: 24,textAlign: 'center'}}>
+              <View
+                style={{
+                  flex: 1,
+                  paddingHorizontal: normalize(24),
+                  justifyContent: 'center',
+                }}>
+                <Typography style={{fontSize: 24, textAlign: 'center'}}>
                   No tienes items en tu carrito
                 </Typography>
               </View>
@@ -114,7 +119,7 @@ export default function Cart() {
           )}
         </>
       ) : (
-        <UserValidation />
+        <Login />
       )}
     </View>
   );

@@ -3,14 +3,14 @@ import Wrapper from '@/shared/components/wrapper';
 import HeaderWithIcon from '@/shared/components/headerBack';
 import {shoppingBag} from '@/shared/assets/icons';
 import TopNavigation from '@/modules/private/orders/components/topNavigation';
-import {View} from 'react-native';
+import {Dimensions, Image, View} from 'react-native';
 import {styles} from './styles';
 import Order from '@/modules/private/orders/components/order';
-import UserValidation from '@/shared/components/user-validation/userValidation';
 import {StoreContext} from '@/context/context';
 import useOrders from '@/shared/hooks/useOrders';
 import {TAB_LIST} from '@/shared/constants/global';
 import {mutate} from 'swr';
+import Login from '@/modules/auth/login';
 
 export default function Orders() {
   const {user} = React.useContext(StoreContext);
@@ -34,12 +34,20 @@ export default function Orders() {
             {data?.map(order => (
               <Order order={order} key={`product-${order.id}`} />
             ))}
+            {!isLoading && !isValidating && data?.length === 0 && (
+              <Image
+                source={require('@/shared/assets/icons/no-orders.png')}
+                style={{
+                  width: Dimensions.get('screen').width - 20,
+                  height: 350,
+                  opacity: 0.25,
+                }}
+              />
+            )}
           </View>
         </Wrapper>
       ) : (
-        <View style={{flex: 1, alignContent: 'center'}}>
-          <UserValidation />
-        </View>
+        <Login />
       )}
     </>
   );
