@@ -70,10 +70,10 @@ export function Option({option, callback}: OptionProps) {
         </View>
       </View>
       <View style={styles.row}>
-        {option?.price && (
+        {/* {option?.price && (
           <Typography style={styles.price} translate={false}>{currencyType}{option?.price || ''}</Typography>
         )}
-        <Radio active={option.active} />
+        <Radio active={option.active} /> */}
       </View>
     </TouchableOpacity>
   )

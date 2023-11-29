@@ -4,7 +4,7 @@ import {en, es} from '@/shared/i18n/index';
 
 const resources = {
   en: {
-    translation: en,
+    translation: es,
   },
   es: {
     translation: es,

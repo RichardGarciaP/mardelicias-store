@@ -32,8 +32,8 @@ import ListOptionCard, {
 import {Button} from '@/shared/components/buttons';
 import useDarkMode from '@/shared/hooks/useDarkMode';
 import UserValidation from '@/shared/components/user-validation/userValidation';
-import { StoreContext } from '@/context/context';
-import { signOut } from '@/shared/helpers/services/login';
+import {StoreContext} from '@/context/context';
+import {signOut} from '@/shared/helpers/services/login';
 
 const Profile = () => {
   const [toggleDarkMode, setToggleDarkMode] = useState<boolean>(false);
@@ -42,7 +42,7 @@ const Profile = () => {
   const [openModal, setOpenModal] = useState(false);
   const [addressSelected, setAddressSelected] = useState<OptionCardOptions>();
   const {isDarkMode, changeColorScheme} = useDarkMode();
-  const { user, setUser } = React.useContext(StoreContext)
+  const {user, setUser} = React.useContext(StoreContext);
 
   function onSelectAddress(option: OptionCardOptions) {
     setAddressSelected(option);
@@ -59,10 +59,8 @@ const Profile = () => {
   const handleLogOut = async () => {
     await signOut();
     await storage.delete('user');
-    setUser(undefined)
-  }
-
-
+    setUser(undefined);
+  };
 
   return (
     <>
@@ -78,7 +76,7 @@ const Profile = () => {
                     fontSize: 24,
                     marginLeft: normalize(10),
                   }}>
-                  Mi Perfil
+                  Mi perfil
                 </Typography>
               </View>
             </View>
@@ -87,17 +85,25 @@ const Profile = () => {
               <View
                 style={{
                   flexDirection: 'row',
+                  alignItems: 'center',
                 }}>
+                <Image
+                  style={styles.image}
+                  borderRadius={50}
+                  source={{
+                    uri: 'https://as1.ftcdn.net/v2/jpg/03/39/45/96/1000_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpg',
+                  }}
+                />
                 <View
                   style={{
                     flexDirection: 'column',
-                    justifyContent: 'space-evenly',
+                    justifyContent: 'space-evenly'            
                   }}>
                   <Typography style={{fontWeight: '700', fontSize: 16}}>
-                    {`${user.user_metadata?.first_name} ${user.user_metadata.last_name}`}
+                    Username
                   </Typography>
                   <Typography style={{fontWeight: '500', fontSize: 14}}>
-                    {user.user_metadata.dni}
+                    {`${user.user_metadata.first_name} ${user.user_metadata.last_name}`}
                   </Typography>
                   <Typography style={{fontWeight: '500', fontSize: 14}}>
                     {user.phone}
@@ -105,25 +111,23 @@ const Profile = () => {
                   <Typography style={{fontWeight: '500', fontSize: 14}}>
                     {user.email}
                   </Typography>
-                  <Typography style={{fontWeight: '500', fontSize: 14}}>
-                    {user.user_metadata.direction}
-                  </Typography>
-                  <Typography style={{fontWeight: '500', fontSize: 14}}>
-                    {user.user_metadata.direction_detail}
-                  </Typography>
-                  
                 </View>
               </View>
-              {/* <TouchableOpacity onPress={() => navigate('editProfile')}>
-                <Icon icon={edit} />
-              </TouchableOpacity> */}
             </View>
 
-
             <Section
-              title="Configuración de la app"
+              title="Información de la cuenta"
               elements={[
-                {name: "Cierra sesión", leftIcon: <Icon icon={logout} />, onPress: () => handleLogOut() },
+                {
+                  name: 'Dirección',
+                  leftIcon: <Icon icon={location} />,
+                  onPress: () => toggleModal(),
+                },
+                {
+                  name: 'Cerrar sesión',
+                  leftIcon: <Icon icon={logout} />,
+                  onPress: () => handleLogOut(),
+                },
               ]}
             />
 
@@ -139,7 +143,7 @@ const Profile = () => {
                       fontSize: normalize(24),
                       marginLeft: normalize(10),
                     }}>
-                    {'general.address'}
+                    Dirección
                   </Typography>
                 </TouchableOpacity>
 
@@ -150,32 +154,18 @@ const Profile = () => {
                     {
                       id: '1',
                       icon: location,
-                      title: 'Home',
-                      description:
-                        'Snow Street, San Francisco, California 42343',
-                      active: false,
-                    },
-                    {
-                      id: '2',
-                      icon: location,
-                      title: 'Parent House',
-                      description:
-                        'Snow Street, San Francisco, California 423433123',
+                      title: user.user_metadata.city,
+                      description: user.user_metadata.direction,
                       active: false,
                     },
                   ]}
-                />
-
-                <Button
-                  onPress={navigateToNewAddress}
-                  title="Add New Address"
                 />
               </View>
             </ButtonSheet>
           </View>
         </Wrapper>
       ) : (
-          <UserValidation />
+        <UserValidation />
       )}
     </>
   );
