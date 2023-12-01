@@ -16,10 +16,7 @@ export const _styles = (isDarkMode: boolean) =>
       marginBottom: normalize(32),
     },
     formContainer: {
-      position: 'absolute',
-      bottom: 0,
       width: '100%',
-      zIndex: 100,
       backgroundColor: semantic.fill.f03,
       borderTopEndRadius: normalize(20),
       borderTopStartRadius: normalize(20),
@@ -37,7 +34,7 @@ export const _styles = (isDarkMode: boolean) =>
       fontSize: normalize(18),
       fontWeight: '700',
       color: semantic.text.black,
-      marginVertical: normalize(24),
+      marginBottom: normalize(24),
     },
     dividerLight: {
       borderWidth: 1,

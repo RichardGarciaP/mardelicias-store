@@ -19,7 +19,7 @@ export default function Home() {
   const {user} = React.useContext(StoreContext);
 
   return (
-    <Wrapper isDark={true}>
+    <Wrapper isDark={true} loading={isLoading || isValidating}>
       <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1}}>
         <Header />
         <View style={{height: normalize(20)}} />
