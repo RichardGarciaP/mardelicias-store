@@ -67,7 +67,6 @@ const EditProfile = () => {
     values: NewUser,
     {setErrors, setStatus, setSubmitting, resetForm}: FormikHelpers<NewUser>,
   ) => {
-    console.log(values);
     const {data, error} = await updateUser(user.id, {...values});
 
     if (error) {
@@ -80,7 +79,6 @@ const EditProfile = () => {
 
     setStatus({success: true});
     setSubmitting(false);
-    console.log('+++++++++++++++++++++', data);
     setUser(data.user);
     await storage.create('user', data.user);
     resetForm();
@@ -231,7 +229,7 @@ const EditProfile = () => {
                       </View>
                     )}
                     <Button
-                      title="Registrar"
+                      title="Actualizar"
                       onPress={() => submitForm()}
                       loading={isSubmitting}
                     />

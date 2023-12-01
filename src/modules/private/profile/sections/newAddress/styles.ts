@@ -48,4 +48,7 @@ export const _styles = (isDarkMode: boolean) =>
       flexDirection: 'row',
       alignItems: 'center',
     },
+    textError: {
+      color: 'red',
+    },
   });

@@ -11,7 +11,7 @@ interface ButtonSheetProps {
   bottom?: number;
   onClose?: ((event: GestureResponderEvent) => void) | undefined;
 }
-export default function ButtonSheet({
+export default function ButtonSheetModa({
   dispatch,
   children,
   height,
