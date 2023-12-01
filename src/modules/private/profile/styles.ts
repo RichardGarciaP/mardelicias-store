@@ -36,4 +36,7 @@ export const styles = StyleSheet.create({
     height: normalize(70),
     marginRight: normalize(20),
   },
+  scrollContainer: {
+    paddingBottom: normalize(50),
+  },
 });

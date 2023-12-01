@@ -27,9 +27,17 @@ export const styles = StyleSheet.create({
 
     elevation: 2,
   },
+  descriptionContainer: {
+    marginLeft: normalize(10),
+    flexDirection: 'column',
+    alignContent: 'center',
+  },
   name: {
     fontWeight: '800',
     fontSize: 16,
-    marginLeft: normalize(10),
+  },
+  detail: {
+    fontWeight: '500',
+    fontSize: 14,
   },
 });

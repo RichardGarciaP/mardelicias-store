@@ -35,24 +35,13 @@ import UserValidation from '@/shared/components/user-validation/userValidation';
 import {StoreContext} from '@/context/context';
 import {signOut} from '@/shared/helpers/services/login';
 import Login from '@/modules/auth/login';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const Profile = () => {
-  const [toggleDarkMode, setToggleDarkMode] = useState<boolean>(false);
   const {navigate} = useNavigation<NavigationProps>();
-
-  const [openModal, setOpenModal] = useState(false);
-  const [addressSelected, setAddressSelected] = useState<OptionCardOptions>();
   const {user, setUser} = React.useContext(StoreContext);
 
-  function onSelectAddress(option: OptionCardOptions) {
-    setAddressSelected(option);
-  }
-  function toggleModal() {
-    setOpenModal(!openModal);
-  }
-
   function navigateToNewAddress() {
-    toggleModal();
     navigate('addNewAddress');
   }
 
@@ -114,8 +103,9 @@ const Profile = () => {
               elements={[
                 {
                   name: 'Dirección',
+                  description: user?.user_metadata?.direction,
                   leftIcon: <Icon icon={location} />,
-                  onPress: () => toggleModal(),
+                  onPress: () => navigateToNewAddress(),
                 },
                 {
                   name: 'profile.logout',
@@ -124,52 +114,6 @@ const Profile = () => {
                 },
               ]}
             />
-
-            <ButtonSheet dispatch={openModal}>
-              <View style={{padding: normalize(24)}}>
-                <TouchableOpacity
-                  onPress={toggleModal}
-                  style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Icon icon={arrowBack} />
-                  <Typography
-                    style={{
-                      fontWeight: '700',
-                      fontSize: normalize(24),
-                      marginLeft: normalize(10),
-                    }}>
-                    {'general.address'}
-                  </Typography>
-                </TouchableOpacity>
-
-                <ListOptionCard
-                  value={addressSelected}
-                  onChange={onSelectAddress}
-                  options={[
-                    {
-                      id: '1',
-                      icon: location,
-                      title: 'Home',
-                      description:
-                        'Snow Street, San Francisco, California 42343',
-                      active: false,
-                    },
-                    {
-                      id: '2',
-                      icon: location,
-                      title: 'Parent House',
-                      description:
-                        'Snow Street, San Francisco, California 423433123',
-                      active: false,
-                    },
-                  ]}
-                />
-
-                <Button
-                  onPress={navigateToNewAddress}
-                  title="Add New Address"
-                />
-              </View>
-            </ButtonSheet>
           </View>
         </Wrapper>
       ) : (

@@ -10,6 +10,7 @@ import {semantic} from '@/shared/constants/colors';
 
 interface Element {
   name: string;
+  description?: string;
   leftIcon: React.ReactNode;
   rightElement?: React.ReactNode;
   onPress?: () => void;
@@ -38,7 +39,14 @@ const Section: FC<SectionProps> = ({elements}) => {
           activeOpacity={0.9}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             {element.leftIcon}
-            <Typography style={styles.name}>{element.name}</Typography>
+            <View style={styles.descriptionContainer}>
+              <Typography style={styles.name}>{element.name}</Typography>
+              {element.description && (
+                <Typography style={styles.detail}>
+                  {element.description}
+                </Typography>
+              )}
+            </View>
           </View>
           {element.rightElement ? (
             element.rightElement
