@@ -136,6 +136,21 @@ export interface NewUser {
   submit: string;
 }
 
+export interface EditUser {
+  id: string;
+  city: string;
+  direction: string;
+  direction_detail: string;
+  dni: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  password: string;
+  phone: string;
+  role: string;
+  submit: string;
+}
+
 export interface ProductsStore {
   created_at: Date;
   description: string;

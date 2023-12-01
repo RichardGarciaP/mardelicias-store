@@ -15,6 +15,7 @@ interface ButtonProps {
   onPress?: ((event: GestureResponderEvent) => void) | undefined;
   loading?: boolean | undefined;
   sm?: boolean;
+  rightIcon?: any;
 }
 export default function Button({
   disabled,
@@ -23,6 +24,7 @@ export default function Button({
   onPress,
   loading,
   sm,
+  rightIcon,
 }: ButtonProps) {
   const styles = _styles(disabled, sm);
   return (
@@ -37,7 +39,7 @@ export default function Button({
       ) : (
         <View style={styles.textContainer}>
           <Typography style={styles.text}>{title}</Typography>
-          <Icon customStyles={styles.icon} icon={shippingCart} />
+          {rightIcon && <Icon customStyles={styles.icon} icon={shippingCart} />}
         </View>
       )}
     </TouchableOpacity>

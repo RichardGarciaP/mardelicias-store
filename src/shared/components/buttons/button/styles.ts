@@ -31,6 +31,6 @@ export const _styles = (
       tintColor: semantic.text.white,
       width: normalize(24),
       height: normalize(24),
-      marginLeft: normalize(6),
+      marginLeft: normalize(5),
     },
   });

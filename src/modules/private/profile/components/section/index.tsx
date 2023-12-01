@@ -5,8 +5,8 @@ import Icon from '@/shared/components/icon';
 import {chevronLeft} from '@/shared/assets/icons';
 import {normalize} from '@/shared/helpers';
 import {styles} from './styles';
-import useDarkMode from "@/shared/hooks/useDarkMode";
-import { semantic } from "@/shared/constants/colors";
+import useDarkMode from '@/shared/hooks/useDarkMode';
+import {semantic} from '@/shared/constants/colors';
 
 interface Element {
   name: string;
@@ -16,26 +16,26 @@ interface Element {
 }
 
 interface SectionProps {
-  title: string;
   elements: Element[];
 }
 
-const Section: FC<SectionProps> = ({title, elements}) => {
-  const {isDarkMode} = useDarkMode()
+const Section: FC<SectionProps> = ({elements}) => {
+  const {isDarkMode} = useDarkMode();
   const stylesIcon = {
-    tintColor: isDarkMode ? semantic.background.white.w500 : semantic.text.grey
-  }
+    tintColor: isDarkMode ? semantic.background.white.w500 : semantic.text.grey,
+  };
   return (
     <View
       style={{
         marginVertical: normalize(10),
+        marginTop: normalize(16),
       }}>
-      <Typography style={styles.title}>{title}</Typography>
       {elements.map((element, index) => (
         <TouchableOpacity
           key={index}
           style={styles.rowContainer}
-          onPress={element?.onPress}>
+          onPress={element?.onPress}
+          activeOpacity={0.9}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             {element.leftIcon}
             <Typography style={styles.name}>{element.name}</Typography>

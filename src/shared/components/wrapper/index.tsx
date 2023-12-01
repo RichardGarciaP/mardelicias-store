@@ -15,7 +15,7 @@ interface WrapperProps {
   loading?: boolean;
   titleLoader?: string;
   isCentered?: boolean;
-  backgroundColor?: string;
+  isDark?: boolean;
 }
 export default function Wrapper({
   children,
@@ -24,10 +24,11 @@ export default function Wrapper({
   loading,
   titleLoader,
   isCentered = false,
-  backgroundColor = '#F1EDE7',
+  isDark = false,
 }: WrapperProps) {
-  const {isDarkMode} = useDarkMode();
   const animationScale = useRef(new Animated.Value(1)).current;
+
+  const backgroundColor = isDark ? '#F5F5F5' : 'white';
 
   useEffect(() => {
     let animation: any;

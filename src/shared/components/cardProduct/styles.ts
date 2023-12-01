@@ -36,7 +36,7 @@ export const _styles = (isDarkMode: boolean) =>
 
     name: {
       fontSize: 16,
-      fontWeight: '700',
+      fontWeight: '600',
       color: isDarkMode ? semantic.text.white : semantic.text.black,
       opacity: 0.8,
       maxHeight: normalize(50),
@@ -49,7 +49,7 @@ export const _styles = (isDarkMode: boolean) =>
     price: {
       color: palette.main.p500,
       fontSize: 14,
-      fontWeight: '700',
+      fontWeight: '500',
       marginBottom: normalize(15),
     },
   });

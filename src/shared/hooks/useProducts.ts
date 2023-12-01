@@ -14,7 +14,7 @@ const useProducts = (): UseProductsProps => {
   const ENTITY = 'products';
 
   const response = useSWR(`/${ENTITY}`, () => getProducts());
-
+  console.log('productos', response);
   return {
     ...response,
     data: response.data?.data,

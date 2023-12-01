@@ -31,13 +31,13 @@ export default function Header() {
         <View>
           <Typography style={styles.nameUser} translate={false}>
             {user
-              ? `${user?.user_metadata.first_name} ${user?.user_metadata.last_name}`
+              ? `${user?.user_metadata?.first_name} ${user?.user_metadata?.last_name}`
               : 'Invitado'}
           </Typography>
           <View style={styles.row}>
             <Icon customStyles={styles.iconLocation} icon={location} />
             <Typography style={styles.location} translate={false}>
-              {user ? user?.user_metadata.city : 'Invitado'}
+              {user ? user?.user_metadata?.city : 'Invitado'}
             </Typography>
           </View>
         </View>

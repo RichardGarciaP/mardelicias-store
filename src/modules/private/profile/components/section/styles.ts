@@ -13,11 +13,23 @@ export const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: normalize(20),
+    paddingHorizontal: normalize(15),
+    paddingVertical: normalize(18),
+    backgroundColor: 'white',
+    marginBottom: normalize(10),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+
+    elevation: 2,
   },
   name: {
-    fontWeight: '700',
-    fontSize: 14,
+    fontWeight: '800',
+    fontSize: 16,
     marginLeft: normalize(10),
   },
 });

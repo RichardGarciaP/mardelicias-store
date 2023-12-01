@@ -19,16 +19,17 @@ export default function Home() {
   const {user} = React.useContext(StoreContext);
 
   return (
-    <Wrapper>
+    <Wrapper isDark={true}>
       <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1}}>
         <Header />
         <View style={{height: normalize(20)}} />
         <View style={{paddingHorizontal: normalize(24)}}>
           <Text style={styles.subtitle}>
             Bienvenido!{' '}
-            {user && (
+            {user && user.user_metadata && (
               <>
-                {user.user_metadata.first_name} {user.user_metadata.last_name}
+                {user?.user_metadata?.first_name}{' '}
+                {user?.user_metadata?.last_name}
               </>
             )}
           </Text>

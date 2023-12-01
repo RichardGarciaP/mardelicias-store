@@ -1,7 +1,7 @@
 import {normalize} from '@/shared/helpers';
 import {StyleSheet} from 'react-native';
 
-export const _styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     height: '100%',
     paddingHorizontal: normalize(30),
@@ -28,5 +28,14 @@ export const _styles = StyleSheet.create({
   formContainer: {
     marginVertical: normalize(30),
     gap: normalize(20),
+  },
+  formControl: {
+    marginBottom: normalize(24),
+  },
+  textError: {
+    color: 'red',
+  },
+  form: {
+    marginTop: normalize(32),
   },
 });

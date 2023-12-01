@@ -56,7 +56,7 @@ export default function CardProduct({
           <Typography style={styles.price} translate={false}>
             {currencyType} {product?.price}
           </Typography>
-          <Button title={'Agregar'} onPress={() => {}} />
+          <Button title={'Agregar'} onPress={() => {}} sm />
         </View>
       </View>
     </TouchableOpacity>

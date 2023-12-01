@@ -9,7 +9,7 @@ import {
   notification,
   order,
   security,
-  user,
+  user as userIcon,
   vocher,
   walletFilled,
 } from '@/shared/assets/icons';
@@ -42,7 +42,6 @@ const Profile = () => {
 
   const [openModal, setOpenModal] = useState(false);
   const [addressSelected, setAddressSelected] = useState<OptionCardOptions>();
-  const {isDarkMode, changeColorScheme} = useDarkMode();
   const {user, setUser} = React.useContext(StoreContext);
 
   function onSelectAddress(option: OptionCardOptions) {
@@ -65,19 +64,19 @@ const Profile = () => {
 
   return (
     <>
-      {user ? (
-        <Wrapper>
+      {user && user.user_metadata ? (
+        <Wrapper isDark>
           <View style={styles.container}>
             <View style={styles.profileText}>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Icon icon={user} />
+                <Icon icon={userIcon} />
                 <Typography
                   style={{
                     fontWeight: '700',
                     fontSize: 24,
                     marginLeft: normalize(10),
                   }}>
-                  Mi perfil
+                  Perfil
                 </Typography>
               </View>
             </View>
@@ -86,14 +85,10 @@ const Profile = () => {
               <View
                 style={{
                   flexDirection: 'row',
-                  alignItems: 'center',
                 }}>
                 <Image
                   style={styles.image}
-                  borderRadius={50}
-                  source={{
-                    uri: 'https://as1.ftcdn.net/v2/jpg/03/39/45/96/1000_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpg',
-                  }}
+                  source={{uri: 'https://i.ibb.co/hZqwx78/049-girl-25.png'}}
                 />
                 <View
                   style={{
@@ -101,23 +96,21 @@ const Profile = () => {
                     justifyContent: 'space-evenly',
                   }}>
                   <Typography style={{fontWeight: '700', fontSize: 16}}>
-                    Username
+                    {`${user?.user_metadata?.first_name} ${user?.user_metadata?.last_name}`}
                   </Typography>
                   <Typography style={{fontWeight: '500', fontSize: 14}}>
-                    {`${user.user_metadata.first_name} ${user.user_metadata.last_name}`}
-                  </Typography>
-                  <Typography style={{fontWeight: '500', fontSize: 14}}>
-                    {user.phone}
+                    {`(593) ${user?.phone}`}
                   </Typography>
                   <Typography style={{fontWeight: '500', fontSize: 14}}>
                     {user.email}
                   </Typography>
                 </View>
               </View>
+              <TouchableOpacity onPress={() => navigate('editProfile')}>
+                <Icon icon={edit} />
+              </TouchableOpacity>
             </View>
-
             <Section
-              title="Información de la cuenta"
               elements={[
                 {
                   name: 'Dirección',
@@ -125,7 +118,7 @@ const Profile = () => {
                   onPress: () => toggleModal(),
                 },
                 {
-                  name: 'Cerrar sesión',
+                  name: 'profile.logout',
                   leftIcon: <Icon icon={logout} />,
                   onPress: () => handleLogOut(),
                 },
@@ -144,7 +137,7 @@ const Profile = () => {
                       fontSize: normalize(24),
                       marginLeft: normalize(10),
                     }}>
-                    Dirección
+                    {'general.address'}
                   </Typography>
                 </TouchableOpacity>
 
@@ -155,11 +148,25 @@ const Profile = () => {
                     {
                       id: '1',
                       icon: location,
-                      title: user.user_metadata.city,
-                      description: user.user_metadata.direction,
+                      title: 'Home',
+                      description:
+                        'Snow Street, San Francisco, California 42343',
+                      active: false,
+                    },
+                    {
+                      id: '2',
+                      icon: location,
+                      title: 'Parent House',
+                      description:
+                        'Snow Street, San Francisco, California 423433123',
                       active: false,
                     },
                   ]}
+                />
+
+                <Button
+                  onPress={navigateToNewAddress}
+                  title="Add New Address"
                 />
               </View>
             </ButtonSheet>
