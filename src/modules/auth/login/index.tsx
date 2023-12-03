@@ -64,7 +64,6 @@ export default function Login() {
   };
   return (
     <View style={styles.wrapper}>
-      <View style={{height: normalize(32)}} />
       <TitleAuth title={'Regresar'} />
       <View>
         <View style={styles.imageWrapper}>
@@ -149,7 +148,7 @@ export default function Login() {
 
       <View style={styles.signUp}>
         <TouchableWithoutFeedback onPress={navigateToSignup}>
-          <Text>¿No tienes cuenta? Registrate</Text>
+          <Text style={styles.signUpText}>¿No tienes cuenta? Registrate</Text>
         </TouchableWithoutFeedback>
       </View>
     </View>

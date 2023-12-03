@@ -3,13 +3,15 @@ import {normalize} from '@/shared/helpers';
 import {palette} from '@/shared/constants/colors';
 
 export const styles = StyleSheet.create({
-  container: {
+  wrapper: {
     flex: 1,
+    backgroundColor: 'white',
     paddingHorizontal: normalize(24),
   },
-  form: {
-    marginTop: normalize(32),
+  container: {
+    flex: 1,
   },
+  form: {},
   formControl: {
     marginBottom: normalize(24),
   },

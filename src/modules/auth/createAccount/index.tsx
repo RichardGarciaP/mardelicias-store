@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Wrapper from '@/shared/components/wrapper';
 import Input from '@/shared/components/input';
-import {ToastAndroid, TouchableOpacity, View} from 'react-native';
+import {ScrollView, ToastAndroid, TouchableOpacity, View} from 'react-native';
 import {Button} from '@/shared/components/buttons';
 import {styles} from './styles';
 import TitleAuth from '@/shared/components/titleAuth';
@@ -23,6 +23,7 @@ import Typography from '@/shared/components/typography';
 import {NewUser} from '@/shared/DTO';
 import {createUser} from '@/shared/helpers/services/login';
 import {NavigationProps} from '@/shared/routes/stack';
+import {normalize} from '@/shared/helpers';
 
 export default function CreateAccount() {
   const validations = Yup.object().shape({
@@ -83,187 +84,191 @@ export default function CreateAccount() {
   };
 
   return (
-    <Wrapper>
-      <Formik
-        initialValues={{
-          dni: '',
-          first_name: '',
-          last_name: '',
-          phone: '',
-          email: '',
-          password: '',
-          role: '',
-          city: '',
-          direction: '',
-          direction_detail: '',
-          submit: '',
-        }}
-        validationSchema={validations}
-        onSubmit={onSubmit}>
-        {({
-          errors,
-          handleChange,
-          isSubmitting,
-          submitForm,
-          touched,
-          values,
-        }: FormikProps<NewUser>) => (
-          <View style={styles.container}>
-            <TitleAuth title="Regresar" />
+    <View style={styles.wrapper}>
+      <TitleAuth title="Regresar" />
 
-            <View style={styles.form}>
-              <View style={styles.formControl}>
-                <Input
-                  label="Numero de Cédula"
-                  placeholder="13xxxxxxxx"
-                  onChangeText={handleChange('dni')}
-                  value={values.dni}
-                />
-                {touched.dni && errors.dni && (
-                  <Typography style={styles.textError}>{errors.dni}</Typography>
-                )}
-              </View>
-              <View style={styles.formControl}>
-                <Input
-                  leftIcon={<Icon icon={user} />}
-                  label="Nombres"
-                  placeholder="Nombres"
-                  onChangeText={handleChange('first_name')}
-                  value={values.first_name}
-                />
-                {touched.first_name && errors.first_name && (
-                  <Typography style={styles.textError}>
-                    {errors.first_name}
-                  </Typography>
-                )}
-              </View>
-              <View style={styles.formControl}>
-                <Input
-                  leftIcon={<Icon icon={user} />}
-                  label="Apellidos"
-                  placeholder="Apellidos"
-                  onChangeText={handleChange('last_name')}
-                  value={values.last_name}
-                />
-                {touched.last_name && errors.last_name && (
-                  <Typography style={styles.textError}>
-                    {errors.last_name}
-                  </Typography>
-                )}
-              </View>
-              <View style={styles.formControl}>
-                <Input
-                  leftIcon={<Icon icon={mail} />}
-                  label="Correo Electrónico"
-                  placeholder="Correo Electrónico"
-                  onChangeText={handleChange('email')}
-                  value={values.email}
-                  keyboardType="email-address"
-                />
-                {touched.email && errors.email && (
-                  <Typography style={styles.textError}>
-                    {errors.email}
-                  </Typography>
-                )}
-              </View>
-              <View style={styles.formControl}>
-                <Input
-                  leftIcon={<Icon icon={lock} />}
-                  rightIcon={
-                    <TouchableOpacity onPress={togglePassword}>
-                      <Icon icon={isSecureActive ? eyeOff : eyeFilled} />
-                    </TouchableOpacity>
-                  }
-                  secureTextEntry={isSecureActive}
-                  label="Contraseña"
-                  placeholder="contraseña"
-                  onChangeText={handleChange('password')}
-                  value={values.password}
-                />
-                {touched.password && errors.password && (
-                  <Typography style={styles.textError}>
-                    {errors.password}
-                  </Typography>
-                )}
-              </View>
-              <View style={styles.formControl}>
-                <Input
-                  leftIcon={<Icon icon={phone} />}
-                  label="Celular"
-                  placeholder="09xxxxxxx"
-                  keyboardType="phone-pad"
-                  onChangeText={handleChange('phone')}
-                  value={values.phone}
-                />
-                {touched.phone && errors.phone && (
-                  <Typography style={styles.textError}>
-                    {errors.phone}
-                  </Typography>
-                )}
-              </View>
-              <View style={styles.formControl}>
-                <Input
-                  leftIcon={<Icon icon={location} />}
-                  label="Ciudad"
-                  placeholder="Ciudad"
-                  multiline
-                  onChangeText={handleChange('city')}
-                  value={values.city}
-                />
-                {touched.city && errors.city && (
-                  <Typography style={styles.textError}>
-                    {errors.city}
-                  </Typography>
-                )}
-              </View>
-              <View style={styles.formControl}>
-                <Input
-                  leftIcon={<Icon icon={location} />}
-                  label="Dirección"
-                  placeholder="Dirección"
-                  onChangeText={handleChange('direction')}
-                  value={values.direction}
-                />
-                {touched.direction && errors.direction && (
-                  <Typography style={styles.textError}>
-                    {errors.direction}
-                  </Typography>
-                )}
-              </View>
-              <View style={styles.formControl}>
-                <Input
-                  leftIcon={<Icon icon={location} />}
-                  label="Detalle de la Direccón"
-                  placeholder="Piso 4 Edificio color Azul"
-                  multiline
-                  onChangeText={handleChange('direction_detail')}
-                  value={values.direction_detail}
-                />
-                {touched.direction_detail && errors.direction_detail && (
-                  <Typography style={styles.textError}>
-                    {errors.direction_detail}
-                  </Typography>
-                )}
-              </View>
-            </View>
-
-            <View style={styles.formControl}>
-              {errors.submit && (
+      <ScrollView>
+        <Formik
+          initialValues={{
+            dni: '',
+            first_name: '',
+            last_name: '',
+            phone: '',
+            email: '',
+            password: '',
+            role: '',
+            city: '',
+            direction: '',
+            direction_detail: '',
+            submit: '',
+          }}
+          validationSchema={validations}
+          onSubmit={onSubmit}>
+          {({
+            errors,
+            handleChange,
+            isSubmitting,
+            submitForm,
+            touched,
+            values,
+          }: FormikProps<NewUser>) => (
+            <View style={styles.container}>
+              <View style={styles.form}>
                 <View style={styles.formControl}>
-                  <Typography style={styles.textError}>
-                    {errors.submit}
-                  </Typography>
+                  <Input
+                    label="Numero de Cédula"
+                    placeholder="13xxxxxxxx"
+                    onChangeText={handleChange('dni')}
+                    value={values.dni}
+                  />
+                  {touched.dni && errors.dni && (
+                    <Typography style={styles.textError}>
+                      {errors.dni}
+                    </Typography>
+                  )}
                 </View>
-              )}
-              <Button
-                title="Registrar"
-                onPress={() => submitForm()}
-                loading={isSubmitting}
-              />
+                <View style={styles.formControl}>
+                  <Input
+                    leftIcon={<Icon icon={user} />}
+                    label="Nombres"
+                    placeholder="Nombres"
+                    onChangeText={handleChange('first_name')}
+                    value={values.first_name}
+                  />
+                  {touched.first_name && errors.first_name && (
+                    <Typography style={styles.textError}>
+                      {errors.first_name}
+                    </Typography>
+                  )}
+                </View>
+                <View style={styles.formControl}>
+                  <Input
+                    leftIcon={<Icon icon={user} />}
+                    label="Apellidos"
+                    placeholder="Apellidos"
+                    onChangeText={handleChange('last_name')}
+                    value={values.last_name}
+                  />
+                  {touched.last_name && errors.last_name && (
+                    <Typography style={styles.textError}>
+                      {errors.last_name}
+                    </Typography>
+                  )}
+                </View>
+                <View style={styles.formControl}>
+                  <Input
+                    leftIcon={<Icon icon={mail} />}
+                    label="Correo Electrónico"
+                    placeholder="Correo Electrónico"
+                    onChangeText={handleChange('email')}
+                    value={values.email}
+                    keyboardType="email-address"
+                  />
+                  {touched.email && errors.email && (
+                    <Typography style={styles.textError}>
+                      {errors.email}
+                    </Typography>
+                  )}
+                </View>
+                <View style={styles.formControl}>
+                  <Input
+                    leftIcon={<Icon icon={lock} />}
+                    rightIcon={
+                      <TouchableOpacity onPress={togglePassword}>
+                        <Icon icon={isSecureActive ? eyeOff : eyeFilled} />
+                      </TouchableOpacity>
+                    }
+                    secureTextEntry={isSecureActive}
+                    label="Contraseña"
+                    placeholder="contraseña"
+                    onChangeText={handleChange('password')}
+                    value={values.password}
+                  />
+                  {touched.password && errors.password && (
+                    <Typography style={styles.textError}>
+                      {errors.password}
+                    </Typography>
+                  )}
+                </View>
+                <View style={styles.formControl}>
+                  <Input
+                    leftIcon={<Icon icon={phone} />}
+                    label="Celular"
+                    placeholder="09xxxxxxx"
+                    keyboardType="phone-pad"
+                    onChangeText={handleChange('phone')}
+                    value={values.phone}
+                  />
+                  {touched.phone && errors.phone && (
+                    <Typography style={styles.textError}>
+                      {errors.phone}
+                    </Typography>
+                  )}
+                </View>
+                <View style={styles.formControl}>
+                  <Input
+                    leftIcon={<Icon icon={location} />}
+                    label="Ciudad"
+                    placeholder="Ciudad"
+                    multiline
+                    onChangeText={handleChange('city')}
+                    value={values.city}
+                  />
+                  {touched.city && errors.city && (
+                    <Typography style={styles.textError}>
+                      {errors.city}
+                    </Typography>
+                  )}
+                </View>
+                <View style={styles.formControl}>
+                  <Input
+                    leftIcon={<Icon icon={location} />}
+                    label="Dirección"
+                    placeholder="Dirección"
+                    onChangeText={handleChange('direction')}
+                    value={values.direction}
+                  />
+                  {touched.direction && errors.direction && (
+                    <Typography style={styles.textError}>
+                      {errors.direction}
+                    </Typography>
+                  )}
+                </View>
+                <View style={styles.formControl}>
+                  <Input
+                    leftIcon={<Icon icon={location} />}
+                    label="Detalle de la Direccón"
+                    placeholder="Piso 4 Edificio color Azul"
+                    multiline
+                    onChangeText={handleChange('direction_detail')}
+                    value={values.direction_detail}
+                  />
+                  {touched.direction_detail && errors.direction_detail && (
+                    <Typography style={styles.textError}>
+                      {errors.direction_detail}
+                    </Typography>
+                  )}
+                </View>
+              </View>
+
+              <View style={styles.formControl}>
+                {errors.submit && (
+                  <View style={styles.formControl}>
+                    <Typography style={styles.textError}>
+                      {errors.submit}
+                    </Typography>
+                  </View>
+                )}
+                <Button
+                  title="Registrar"
+                  onPress={() => submitForm()}
+                  loading={isSubmitting}
+                />
+              </View>
             </View>
-          </View>
-        )}
-      </Formik>
-    </Wrapper>
+          )}
+        </Formik>
+      </ScrollView>
+    </View>
   );
 }

@@ -61,8 +61,14 @@ export const _styles = (isDarkMode: boolean) =>
       width: '100%',
     },
     marker: {
+      height: 55,
+      width: 55,
+    },
+    markerFixed: {
+      left: '50%',
+      marginLeft: -24,
+      marginTop: -48,
       position: 'absolute',
-      alignSelf: 'center',
-      zIndex: 4,
+      top: '50%',
     },
   });

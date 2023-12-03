@@ -50,6 +50,8 @@ export const updateUser = async (id, data) => {
       direction: data?.direction,
       direction_detail: data?.direction_detail,
       role: data?.role,
+      latitude: data?.latitude,
+      longitude: data?.longitude,
     },
   });
 };
@@ -72,6 +74,8 @@ export const updateAddress = async (id, data) => {
       direction: data?.direction,
       direction_detail: data?.direction_detail,
       role: data?.role,
+      latitude: data?.latitude,
+      longitude: data?.longitude,
     },
   });
 };

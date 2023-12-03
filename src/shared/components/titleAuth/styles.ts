@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
+    paddingVertical: normalize(32),
   },
   title: {
     fontSize: normalize(16),

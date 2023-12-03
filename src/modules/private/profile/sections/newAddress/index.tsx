@@ -20,13 +20,23 @@ import {NewUser} from '@/shared/DTO';
 import {updateAddress} from '@/shared/helpers/services/login';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProps} from '@/shared/routes/stack';
-import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE, Marker, Region} from 'react-native-maps';
 
 const NewAddress = () => {
   const {isDarkMode} = useDarkMode();
   const styles = _styles(isDarkMode);
   const {user, setUser} = React.useContext(StoreContext);
   const {goBack} = useNavigation<NavigationProps>();
+  const [region, setRegion] = useState<Region>({
+    latitude: -0.949952,
+    longitude: -80.720673,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  });
+
+  const onRegionChangeComplete = (change: Region) => {
+    setRegion(change);
+  };
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -79,17 +89,15 @@ const NewAddress = () => {
           provider={PROVIDER_GOOGLE}
           style={styles.map}
           showsUserLocation
-          initialRegion={{
-            latitude: -0.949952,
-            longitude: -80.720673,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}>
-          {/* <Marker
-            image={require('@/shared/assets/icons/marker.png')}
-            coordinate={{latitude: -0.949952, longitude: -80.720673}}
-          /> */}
-        </MapView>
+          initialRegion={region}
+          onRegionChangeComplete={onRegionChangeComplete}
+        />
+        <View style={styles.markerFixed}>
+          <Image
+            style={styles.marker}
+            source={require('@/shared/assets/icons/marker.png')}
+          />
+        </View>
       </View>
       <BottomSheet
         ref={bottomSheetRef}

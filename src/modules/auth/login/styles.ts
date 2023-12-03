@@ -13,6 +13,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
+  signUpText: {
+    color: palette.main.p500,
+    opacity: 0.5,
+  },
   imageWrapper: {
     alignItems: 'center',
     marginVertical: normalize(10),
