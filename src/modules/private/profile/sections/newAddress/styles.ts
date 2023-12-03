@@ -51,4 +51,18 @@ export const _styles = (isDarkMode: boolean) =>
     textError: {
       color: 'red',
     },
+    mapContainer: {
+      height: '80%',
+      width: '100%',
+      position: 'relative',
+    },
+    map: {
+      height: '100%',
+      width: '100%',
+    },
+    marker: {
+      position: 'absolute',
+      alignSelf: 'center',
+      zIndex: 4,
+    },
   });

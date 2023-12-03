@@ -21,9 +21,13 @@ import {SessionContextProvider} from '@supabase/auth-helpers-react';
 import {supabase} from '@/shared/helpers/services/client';
 import {StoreProvider} from '@/context/context';
 import SplashScreen from 'react-native-splash-screen';
+import {enableLatestRenderer} from 'react-native-maps';
+import {PremissionsProvider} from '@/context/PermissionsContext';
 
 const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
+
+// enableLatestRenderer();
 
 function TabNavigation() {
   const {isDarkMode} = useDarkMode();
@@ -80,24 +84,26 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <StoreProvider>
-      <SessionContextProvider supabaseClient={supabase}>
-        <NavigationContainer>
-          <Stack.Navigator screenOptions={{headerShown: false}}>
-            <Stack.Screen name="tab" component={TabNavigation} />
-            {RoutesStack.map(route => {
-              return (
-                <Stack.Screen
-                  key={route.path}
-                  name={route.path}
-                  component={route.component}
-                />
-              );
-            })}
-          </Stack.Navigator>
-        </NavigationContainer>
-      </SessionContextProvider>
-    </StoreProvider>
+    <SessionContextProvider supabaseClient={supabase}>
+      <NavigationContainer>
+        <PremissionsProvider>
+          <StoreProvider>
+            <Stack.Navigator screenOptions={{headerShown: false}}>
+              <Stack.Screen name="tab" component={TabNavigation} />
+              {RoutesStack.map(route => {
+                return (
+                  <Stack.Screen
+                    key={route.path}
+                    name={route.path}
+                    component={route.component}
+                  />
+                );
+              })}
+            </Stack.Navigator>
+          </StoreProvider>
+        </PremissionsProvider>
+      </NavigationContainer>
+    </SessionContextProvider>
   );
 }
 

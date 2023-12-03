@@ -1,4 +1,5 @@
 export {default as mail} from './mail.png';
+export {default as marker} from './marker.png';
 export {default as user} from './user.png';
 export {default as lock} from './lock.png';
 export {default as eyeOff} from './eye-off.png';

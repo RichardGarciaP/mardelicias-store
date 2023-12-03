@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
       android:name=".MainApplication"
@@ -9,6 +12,9 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
       android:theme="@style/AppTheme">
+       <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyB3HzeElN6MU7Hz-jUMF1bThrV_f7uJOgM"/>
         <activity
             android:name=".SplashActibity"
             android:theme="@style/SplashTheme"
@@ -26,5 +32,6 @@
         android:windowSoftInputMode="adjustResize"
         android:exported="true">
       </activity>
+      
     </application>
 </manifest>

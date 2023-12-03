@@ -20,6 +20,7 @@ import {NewUser} from '@/shared/DTO';
 import {updateAddress} from '@/shared/helpers/services/login';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProps} from '@/shared/routes/stack';
+import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 
 const NewAddress = () => {
   const {isDarkMode} = useDarkMode();
@@ -30,7 +31,7 @@ const NewAddress = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   // variables
-  const snapPoints = useMemo(() => ['10%', '20%', '60%', '90%'], []);
+  const snapPoints = useMemo(() => ['10%', '60%', '75%', '90%'], []);
 
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {
@@ -73,8 +74,23 @@ const NewAddress = () => {
       <View style={styles.headerBack}>
         <HeaderWithIcon title="Dirección" />
       </View>
-      <Image source={map} />
-
+      <View style={styles.mapContainer}>
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={styles.map}
+          showsUserLocation
+          initialRegion={{
+            latitude: -0.949952,
+            longitude: -80.720673,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}>
+          {/* <Marker
+            image={require('@/shared/assets/icons/marker.png')}
+            coordinate={{latitude: -0.949952, longitude: -80.720673}}
+          /> */}
+        </MapView>
+      </View>
       <BottomSheet
         ref={bottomSheetRef}
         index={1}
