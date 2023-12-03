@@ -8,15 +8,6 @@ export const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: normalize(24),
   },
-
-  signUp: {
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
-  signUpText: {
-    color: palette.main.p500,
-    opacity: 0.5,
-  },
   imageWrapper: {
     alignItems: 'center',
     marginVertical: normalize(10),
@@ -48,5 +39,18 @@ export const styles = StyleSheet.create({
   },
   textError: {
     color: 'red',
+  },
+  signUp: {
+    width: '100%',
+  },
+  newAccount: {
+    width: '100%',
+    paddingVertical: normalize(15),
+  },
+  signUpText: {
+    width: '100%',
+    color: palette.main.p500,
+    opacity: 0.5,
+    textAlign: 'center',
   },
 });

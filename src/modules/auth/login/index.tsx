@@ -7,16 +7,13 @@ import Icon from '@/shared/components/icon';
 import {eyeFilled, eyeOff, lock, mail} from '@/shared/assets/icons';
 import {Button} from '@/shared/components/buttons';
 import Typography from '@/shared/components/typography';
-import Wrapper from '@/shared/components/wrapper';
-import CheckBox from '@/shared/components/checkbox';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProps} from '@/shared/routes/stack';
 import * as Yup from 'yup';
 import {Formik, FormikHelpers, FormikProps} from 'formik';
-import {Session, useSupabaseClient} from '@supabase/auth-helpers-react';
 import {UserDTO} from '@/shared/DTO';
 import {signInWithEmail} from '@/shared/helpers/services/login';
-import {normalize, storage} from '@/shared/helpers';
+import {storage} from '@/shared/helpers';
 import {StoreContext} from '@/context/context';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
@@ -134,7 +131,7 @@ export default function Login() {
                   </Typography>
                 </View>
               )}
-              <View style={styles.formControl}>
+              <View>
                 <Button
                   title={'auth.sign_in'}
                   onPress={() => submitForm()}
@@ -147,7 +144,9 @@ export default function Login() {
       </View>
 
       <View style={styles.signUp}>
-        <TouchableWithoutFeedback onPress={navigateToSignup}>
+        <TouchableWithoutFeedback
+          style={styles.newAccount}
+          onPress={navigateToSignup}>
           <Text style={styles.signUpText}>¿No tienes cuenta? Registrate</Text>
         </TouchableWithoutFeedback>
       </View>

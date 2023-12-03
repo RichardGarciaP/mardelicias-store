@@ -71,4 +71,7 @@ export const _styles = (isDarkMode: boolean) =>
       position: 'absolute',
       top: '50%',
     },
+    formControl: {
+      marginBottom: normalize(24),
+    },
   });

@@ -28,13 +28,15 @@ const NewAddress = () => {
   const {user, setUser} = React.useContext(StoreContext);
   const {goBack} = useNavigation<NavigationProps>();
   const [region, setRegion] = useState<Region>({
-    latitude: -0.949952,
-    longitude: -80.720673,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+    latitude: user?.user_metadata?.latitude ?? -0.949952,
+    longitude: user?.user_metadata?.longitude ?? -80.720673,
+    latitudeDelta: 0.01469,
+    longitudeDelta: 0.0087,
   });
 
   const onRegionChangeComplete = (change: Region) => {
+    console.log(change);
+
     setRegion(change);
   };
 
@@ -58,7 +60,11 @@ const NewAddress = () => {
     values: NewUser,
     {setErrors, setStatus, setSubmitting, resetForm}: FormikHelpers<NewUser>,
   ) => {
-    const {data, error} = await updateAddress(user.id, {...values});
+    const {data, error} = await updateAddress(user.id, {
+      ...values,
+      latitude: region.latitude,
+      longitude: region.longitude,
+    });
 
     if (error) {
       setErrors({submit: error.message});
@@ -180,6 +186,14 @@ const NewAddress = () => {
                     </Typography>
                   )}
                 </View>
+
+                {errors.submit && (
+                  <View style={{marginBottom: normalize(24)}}>
+                    <Typography style={styles.textError}>
+                      {errors.submit}
+                    </Typography>
+                  </View>
+                )}
                 <Button
                   title="Actualizar"
                   onPress={() => submitForm()}

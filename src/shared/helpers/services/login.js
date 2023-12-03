@@ -27,6 +27,8 @@ export const createUser = async data => {
       direction: data?.direction,
       direction_detail: data?.direction_detail,
       role: USERS_TYPE_DEFINITIONS.CLIENT,
+      latitude: data?.latitude,
+      longitude: data?.longitude,
     },
   });
 };

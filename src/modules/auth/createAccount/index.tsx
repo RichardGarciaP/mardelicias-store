@@ -1,7 +1,13 @@
 import React, {useState} from 'react';
 import Wrapper from '@/shared/components/wrapper';
 import Input from '@/shared/components/input';
-import {ScrollView, ToastAndroid, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  ScrollView,
+  ToastAndroid,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Button} from '@/shared/components/buttons';
 import {styles} from './styles';
 import TitleAuth from '@/shared/components/titleAuth';
@@ -24,6 +30,7 @@ import {NewUser} from '@/shared/DTO';
 import {createUser} from '@/shared/helpers/services/login';
 import {NavigationProps} from '@/shared/routes/stack';
 import {normalize} from '@/shared/helpers';
+import MapView, {PROVIDER_GOOGLE, Region} from 'react-native-maps';
 
 export default function CreateAccount() {
   const validations = Yup.object().shape({
@@ -54,8 +61,20 @@ export default function CreateAccount() {
     ),
   });
 
+  const [region, setRegion] = useState<Region>({
+    latitude: -0.949952,
+    longitude: -80.720673,
+    latitudeDelta: 0.01469,
+    longitudeDelta: 0.0087,
+  });
   const [isSecureActive, setIsSecureActive] = useState(true);
   const {navigate} = useNavigation<NavigationProps>();
+
+  const onRegionChangeComplete = (change: Region) => {
+    console.log(change);
+
+    setRegion(change);
+  };
 
   const togglePassword = () => {
     setIsSecureActive(!isSecureActive);
@@ -65,7 +84,11 @@ export default function CreateAccount() {
     values: NewUser,
     {setErrors, setStatus, setSubmitting, resetForm}: FormikHelpers<NewUser>,
   ) => {
-    const {error} = await createUser(values);
+    const {error} = await createUser({
+      ...values,
+      latitude: region.latitude,
+      longitude: region.longitude,
+    });
     console.log(error);
 
     if (error) {
@@ -79,6 +102,7 @@ export default function CreateAccount() {
     setStatus({success: true});
     setSubmitting(false);
     resetForm();
+    ToastAndroid.show('Usuario creado correctamente', ToastAndroid.SHORT);
 
     navigate('login');
   };
@@ -248,6 +272,25 @@ export default function CreateAccount() {
                       {errors.direction_detail}
                     </Typography>
                   )}
+                </View>
+                <View style={styles.formControl}>
+                  <Typography style={styles.label}>Ubicación</Typography>
+
+                  <View style={styles.mapContainer}>
+                    <MapView
+                      provider={PROVIDER_GOOGLE}
+                      style={styles.map}
+                      showsUserLocation
+                      initialRegion={region}
+                      onRegionChangeComplete={onRegionChangeComplete}
+                    />
+                    <View style={styles.markerFixed}>
+                      <Image
+                        style={styles.marker}
+                        source={require('@/shared/assets/icons/marker.png')}
+                      />
+                    </View>
+                  </View>
                 </View>
               </View>
 

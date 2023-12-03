@@ -133,6 +133,8 @@ export interface NewUser {
   password: string;
   phone: string;
   role: string;
+  latitude?: number;
+  longitude?: number;
   submit: string;
 }
 
@@ -148,6 +150,8 @@ export interface EditUser {
   password: string;
   phone: string;
   role: string;
+  latitude?: number;
+  longitude?: number;
   submit: string;
 }
 
