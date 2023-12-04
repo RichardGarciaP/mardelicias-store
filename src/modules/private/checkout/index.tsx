@@ -12,11 +12,26 @@ import ResumeTransaction from '@/shared/components/resumeTransaction';
 import useDarkMode from '@/shared/hooks/useDarkMode';
 import {semantic} from '@/shared/constants/colors';
 import {StoreContext} from '@/context/context';
+import SuccessModal from './components/successModal';
+import {useNavigation} from '@react-navigation/native';
+import {NavigationProps} from '@/shared/routes/stack';
 
 export default function Checkout() {
   const {isDarkMode} = useDarkMode();
-  const {cart, total, pending, handleSubmitOrder} =
-    React.useContext(StoreContext);
+  const {
+    cart,
+    total,
+    pending,
+    handleSubmitOrder,
+    orderCreated,
+    setOrderCreated,
+  } = React.useContext(StoreContext);
+  const {navigate} = useNavigation<any>();
+
+  const handleOnSuccessOrder = () => {
+    setOrderCreated(false);
+    navigate('orders');
+  };
 
   return (
     <View
@@ -42,6 +57,10 @@ export default function Checkout() {
       </Wrapper>
       <Button title="Enviar" onPress={handleSubmitOrder} />
       <View style={{height: normalize(40)}} />
+      <SuccessModal
+        dispatch={orderCreated}
+        handleOnSuccessOrder={handleOnSuccessOrder}
+      />
     </View>
   );
 }

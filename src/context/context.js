@@ -3,6 +3,7 @@ import React, {createContext} from 'react';
 import {ToastAndroid} from 'react-native';
 import {createOrder} from '@/shared/helpers/services/orders';
 import Toast from 'react-native-toast-message';
+import {useNavigation} from '@react-navigation/native';
 
 export const StoreContext = createContext();
 
@@ -14,6 +15,7 @@ export const StoreProvider = ({children}) => {
   const [total, setTotal] = React.useState(0);
   const [pending, setPending] = React.useState(0);
   const [paymentMethod, setPaymentMethod] = React.useState(null);
+  const [orderCreated, setOrderCreated] = React.useState(false);
 
   const getLocalUser = async () => {
     const user = await storage.get('user');
@@ -123,7 +125,25 @@ export const StoreProvider = ({children}) => {
     getTotal();
   };
 
+  const resetCart = () => {
+    setCart([]);
+    setTotal(0);
+    setPending(0);
+    setPaymentMethod(null);
+  };
+
   const handleSubmitOrder = async () => {
+    if (!paymentMethod) {
+      ToastAndroid.show(
+        'Debe seleccionar el metodo de pago',
+        ToastAndroid.SHORT,
+      );
+      Toast.show({
+        type: 'error',
+        text1: 'Debe seleccionar el metodo de pago',
+      });
+      return;
+    }
     let order = {
       products: cart,
       user_id: user.id,
@@ -133,9 +153,19 @@ export const StoreProvider = ({children}) => {
       status: 'procesando',
     };
 
-    const response = await createOrder(order);
+    const {error, data} = await createOrder(order);
 
-    console.log(response);
+    if (error) {
+      ToastAndroid.show(
+        'La orden no ha podido ser procesada',
+        ToastAndroid.SHORT,
+      );
+      Toast.show({type: 'error', text1: 'La orden no ha podido ser procesada'});
+      return;
+    }
+
+    setOrderCreated(true);
+    resetCart();
   };
 
   React.useEffect(() => {
@@ -164,6 +194,8 @@ export const StoreProvider = ({children}) => {
         setPaymentMethod: paymentMethod => setPaymentMethod(paymentMethod),
         pending,
         setPending: pending => setPending(pending),
+        orderCreated,
+        setOrderCreated: orderCreated => setOrderCreated(orderCreated),
         handleAddItem: item => handleAddItem(item),
         handleRemoveItem: item => handleRemoveItem(item),
         handleIncrementItem: item => handleIncrementItem(item),
