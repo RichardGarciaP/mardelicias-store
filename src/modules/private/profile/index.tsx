@@ -17,7 +17,7 @@ import Icon from '@/shared/components/icon';
 import Typography from '@/shared/components/typography';
 import Wrapper from '@/shared/components/wrapper';
 import React, {useEffect, useState} from 'react';
-import {View, TouchableOpacity, Image} from 'react-native';
+import {View, TouchableOpacity, Image, Text} from 'react-native';
 import Section from './components/section';
 import Toggle from '@/shared/components/toggle';
 
@@ -40,6 +40,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 const Profile = () => {
   const {navigate} = useNavigation<NavigationProps>();
   const {user, setUser} = React.useContext(StoreContext);
+  const [initials, setInitials] = useState('NA');
 
   function navigateToNewAddress() {
     navigate('addNewAddress');
@@ -50,6 +51,14 @@ const Profile = () => {
     await storage.delete('user');
     setUser(undefined);
   };
+
+  useEffect(() => {
+    setInitials(
+      `${user?.user_metadata?.first_name?.charAt(
+        0,
+      )} ${user?.user_metadata?.last_name?.charAt(0)}`,
+    );
+  }, [user]);
 
   return (
     <>
@@ -75,10 +84,10 @@ const Profile = () => {
                 style={{
                   flexDirection: 'row',
                 }}>
-                <Image
-                  style={styles.image}
-                  source={{uri: 'https://i.ibb.co/hZqwx78/049-girl-25.png'}}
-                />
+                <View style={styles.profileInitials}>
+                  <Text style={styles.profileInitialsText}>{initials}</Text>
+                </View>
+
                 <View
                   style={{
                     flexDirection: 'column',
