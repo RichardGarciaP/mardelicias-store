@@ -6,24 +6,24 @@ import Header from "./components/header";
 import useDarkMode from "@/shared/hooks/useDarkMode";
 import Typography from "@/shared/components/typography";
 import Icon from "@/shared/components/icon";
-import { star, shippingCart, shoppingBag } from "@/shared/assets/icons";
-import Counter from "@/shared/components/counter";
+import {  shippingCart } from "@/shared/assets/icons";
 import { currencyType } from "@/shared/constants/global";
 import { Button } from "@/shared/components/buttons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { StoreContext } from '@/context/context';
+import CounterAdd from '@/shared/components/counterAdd';
 
 export default function DetailPlant({route}) {
   const {navigate} = useNavigation()
   const {isDarkMode} = useDarkMode()
   const {product} = route.params;
   const styles = _styles(isDarkMode)
-  const [quantity,setQuantity] = React.useState(1)
-  const {cart,setCart} = React.useContext(StoreContext)
+  const [quantity, setQuantity] = React.useState(1)
+  const {handleAddItem} = React.useContext(StoreContext)
 
   const addToCart = () => {
-    setCart([...cart,{...product,qty:quantity }]);
-    navigate('tab')
+    handleAddItem({...product, qty:quantity})
+    navigate('shop')
   }
   
   return (
@@ -48,16 +48,16 @@ export default function DetailPlant({route}) {
 
         <View style={styles.containerName}>
           <Typography style={styles.quantity}>Cantidad</Typography>
-          <Counter onChange={() => {}} setQuantity={setQuantity} />
+          <CounterAdd product={{...product, qty:quantity}} setQuantity={setQuantity} />
         </View>
 
         <View style={styles.containerName}>
-          <View style={{flex: 1,}}>
+          <View style={{flex: 1}}>
             <Typography style={styles.price}>Precio</Typography>
             <Typography style={styles.total} translate={false}>{currencyType}{(product.price * quantity).toFixed(2)}</Typography>
           </View>
           <View style={{flex: 1}}>
-            <Button onPress={addToCart} leftIcon={<Icon customStyles={{tintColor: 'white'}} icon={shoppingBag} />} title="Agregar al carrito" />
+            <Button onPress={addToCart} leftIcon={<Icon customStyles={{tintColor: 'white'}} icon={shippingCart} />} title="Agregar al carrito" />
           </View>
         </View>
       </ScrollView>

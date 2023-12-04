@@ -1,5 +1,5 @@
 import {Image, ToastAndroid, View} from 'react-native';
-import React, {useCallback, useMemo, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 
 import HeaderWithIcon from '@/shared/components/headerBack';
 
@@ -21,11 +21,13 @@ import {updateAddress} from '@/shared/helpers/services/login';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProps} from '@/shared/routes/stack';
 import MapView, {PROVIDER_GOOGLE, Marker, Region} from 'react-native-maps';
+import {PermissionsContext} from '@/context/PermissionsContext';
 
 const NewAddress = () => {
   const {isDarkMode} = useDarkMode();
   const styles = _styles(isDarkMode);
   const {user, setUser} = React.useContext(StoreContext);
+  const {askLocationPermission} = React.useContext(PermissionsContext);
   const {goBack} = useNavigation<NavigationProps>();
   const [region, setRegion] = useState<Region>({
     latitude: user?.user_metadata?.latitude ?? -0.949952,
@@ -41,13 +43,14 @@ const NewAddress = () => {
   };
 
   const bottomSheetRef = useRef<BottomSheet>(null);
-
-  // variables
   const snapPoints = useMemo(() => ['10%', '60%', '75%', '90%'], []);
 
-  // callbacks
   const handleSheetChanges = useCallback((index: number) => {
     // console.log('handleSheetChanges', index);
+  }, []);
+
+  useEffect(() => {
+    askLocationPermission();
   }, []);
 
   const validations = Yup.object().shape({
