@@ -3,8 +3,8 @@ import {normalize} from '@/shared/helpers';
 import {semantic} from '@/shared/constants/colors';
 
 const btn = {
-  width: normalize(24),
-  height: normalize(24),
+  width: normalize(34),
+  height: normalize(34),
 };
 
 const icons = {

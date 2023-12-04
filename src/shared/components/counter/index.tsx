@@ -4,6 +4,8 @@ import {styles} from './styles';
 import Typography from '@/shared/components/typography';
 import Icon from '@/shared/components/icon';
 import {Minus, Plus} from '@/shared/assets/icons';
+import {StoreContext} from '@/context/context';
+import {Product} from '@/shared/DTO';
 
 export enum TypeChange {
   minus = 0,
@@ -11,36 +13,27 @@ export enum TypeChange {
 }
 
 interface CounterProps {
-  onChange: (value: number, typeOperation: number) => void
-  cant?: number,
-  setQuantity?: (value:number) => void
+  cant?: number;
+  product?: Product;
 }
 
-export default function Counter({onChange, cant = 1, setQuantity}: CounterProps) {
+export default function Counter({cant = 1, product}: CounterProps) {
   const [count, setCounter] = useState(cant);
-  function handleChange(type: number) {
-    if (type === TypeChange.minus) {
-      if (count > 1) {
-        onChange(count - 1, TypeChange.minus)
-        setCounter(prevState => prevState - 1);
-        setQuantity(count - 1);
-      }
-      return;
-    }
-    onChange(count + 1, TypeChange.plus)
-    setCounter(prevState => prevState + 1);
-    setQuantity(count + 1);
-  }
+  const {handleIncrementItem, handleDecrementItem} =
+    React.useContext(StoreContext);
+
+  if (!product) return null;
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() => handleChange(TypeChange.minus)}
+        onPress={() => handleDecrementItem(product)}
         style={styles.btnReduce}>
         <Icon customStyles={styles.minus} icon={Minus} />
       </TouchableOpacity>
-      <Typography style={styles.value}>{String(count)}</Typography>
+      <Typography style={styles.value}>{String(product.qty)}</Typography>
       <TouchableOpacity
-        onPress={() => handleChange(TypeChange.plus)}
+        onPress={() => handleIncrementItem(product)}
         style={styles.btnAument}>
         <Icon customStyles={styles.plus} icon={Plus} />
       </TouchableOpacity>

@@ -29,7 +29,7 @@ export const _styles = (isDarkMode: boolean) =>
     descriptionContainer: {
       flex: 1,
       paddingTop: normalize(12),
-      paddingBottom: 20,
+      paddingBottom: 12,
       paddingHorizontal: normalize(12),
       justifyContent: 'center',
     },

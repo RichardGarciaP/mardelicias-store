@@ -12,3 +12,6 @@ export const getOrders = async (
     )
     .order('created_at', {ascending: false})
     .eq('user_id', user_id);
+
+export const createOrder = async (order: any) =>
+  await supabase.from('orders').insert({...order});

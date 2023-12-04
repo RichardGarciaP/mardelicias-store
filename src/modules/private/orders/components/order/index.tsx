@@ -56,7 +56,9 @@ export default function Order({order, track = true, map = false}: OrderProps) {
           </View>
           <Typography style={styles.category} translate={false}>
             Repartidor:{' '}
-            {`${order?.orders_driver_user_fkey?.first_name} ${order?.orders_driver_user_fkey?.last_name}`}
+            {order?.orders_driver_user_fkey
+              ? `${order?.orders_driver_user_fkey?.first_name} ${order?.orders_driver_user_fkey?.last_name}`
+              : 'No asignado'}
           </Typography>
           <Typography style={styles.category} translate={false}>
             Cantidad de Productos: {qty}

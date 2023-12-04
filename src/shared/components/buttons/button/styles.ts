@@ -10,7 +10,7 @@ export const _styles = (
     container: {
       backgroundColor: disabled ? semantic.fill.f04 : palette.main.p500,
       paddingHorizontal: normalize(sm ? 6 : 10),
-      paddingVertical: normalize(sm ? 8 : 16),
+      paddingVertical: normalize(sm ? 12 : 16),
       borderRadius: normalize(sm ? 10 : 16),
       flexDirection: 'row',
       alignItems: 'center',

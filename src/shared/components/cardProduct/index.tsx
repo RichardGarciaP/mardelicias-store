@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Image, TouchableOpacity, View} from 'react-native';
 import Typography from '@/shared/components/typography';
 import {currencyType} from '@/shared/constants/global';
@@ -9,6 +9,7 @@ import {useNavigation} from '@react-navigation/native';
 import {ProductsStore} from '@/shared/DTO';
 import {NavigationProps} from '@/shared/routes/stack';
 import {Button} from '../buttons';
+import {StoreContext} from '@/context/context';
 
 interface Props {
   product: ProductsStore;
@@ -26,6 +27,7 @@ export default function CardProduct({
   const {isDarkMode} = useDarkMode();
   const styles = _styles(isDarkMode);
   const navigation = useNavigation<NavigationProps>();
+  const {handleAddItem} = useContext(StoreContext);
 
   function navigateTo() {
     navigation.navigate('detailPlant', {product: product});
@@ -56,7 +58,11 @@ export default function CardProduct({
           <Typography style={styles.price} translate={false}>
             {currencyType} {product?.price}
           </Typography>
-          <Button title={'Agregar'} onPress={() => {}} sm />
+          <Button
+            title={'Agregar'}
+            onPress={() => handleAddItem({...product, qty: 1})}
+            sm
+          />
         </View>
       </View>
     </TouchableOpacity>

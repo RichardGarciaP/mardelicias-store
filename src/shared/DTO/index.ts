@@ -108,7 +108,7 @@ export interface Product {
   id: number;
   qty: number;
   name: string;
-  price: string;
+  price: number;
   stock: number;
   imageUrl: string;
   created_at: Date;
