@@ -21,6 +21,7 @@ export const StoreProvider = ({children}) => {
   const [orderCreated, setOrderCreated] = React.useState(false);
   const [imageVoucher, setImageVoucher] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [coords, setCoords] = React.useState({});
 
   const getLocalUser = async () => {
     const user = await storage.get('user');
@@ -222,6 +223,8 @@ export const StoreProvider = ({children}) => {
       total,
       voucher_url: imagePath ?? '',
       status: 'procesando',
+      latitude: user.user_metadata ? user.user_metadata.latitude : 0,
+      longitude: user.user_metadata ? user.user_metadata.longitude : 0,
     };
 
     const {error, data} = await createOrder(order);
