@@ -1,31 +1,31 @@
-import { storage } from "@/shared/helpers";
-import useEffectOnce from "@/shared/hooks/useEffectOnce";
-import { useState } from "react";
+import {storage} from '@/shared/helpers';
+import useEffectOnce from '@/shared/hooks/useEffectOnce';
+import {useState} from 'react';
 import RNRestart from 'react-native-restart';
 
 export default function useDarkMode() {
-  const [isDarkMode, setIsDarkMode] = useState(false) // dark
+  const [isDarkMode, setIsDarkMode] = useState(false); // dark
 
   async function getDarkMode() {
-    const colorScheme = await storage.get('colorScheme')
+    const colorScheme = await storage.get('colorScheme');
     if (colorScheme) {
       setIsDarkMode(colorScheme == 'dark');
-      return
+      return;
     }
   }
 
   async function changeColorScheme() {
     try {
-      setIsDarkMode(!isDarkMode)
-      await storage.create('colorScheme', isDarkMode ? 'light' : 'dark' )
+      setIsDarkMode(!isDarkMode);
+      await storage.create('colorScheme', isDarkMode ? 'light' : 'dark');
       RNRestart.restart();
     } catch (e) {
-      console.log('error', e)
+      console.log('error', e);
     }
   }
   useEffectOnce(() => {
-    getDarkMode().catch()
-  }, [])
+    getDarkMode().catch();
+  }, []);
   return {
     isDarkMode,
     changeColorScheme,

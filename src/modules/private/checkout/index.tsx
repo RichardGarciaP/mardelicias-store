@@ -15,6 +15,7 @@ import {StoreContext} from '@/context/context';
 import SuccessModal from './components/successModal';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProps} from '@/shared/routes/stack';
+import FileUpdater from './components/fileUpdater';
 
 export default function Checkout() {
   const {isDarkMode} = useDarkMode();
@@ -25,6 +26,7 @@ export default function Checkout() {
     handleSubmitOrder,
     orderCreated,
     setOrderCreated,
+    isLoading,
   } = React.useContext(StoreContext);
   const {navigate} = useNavigation<any>();
 
@@ -50,12 +52,17 @@ export default function Checkout() {
             <AddressSelect />
             <ProductList products={cart} />
             <PaymentMethodSelect />
-
+            <FileUpdater />
             <ResumeTransaction total={total} pending={pending} />
           </View>
         </View>
+        <Button
+          title="Enviar"
+          onPress={handleSubmitOrder}
+          loading={isLoading}
+          disabled={isLoading}
+        />
       </Wrapper>
-      <Button title="Enviar" onPress={handleSubmitOrder} />
       <View style={{height: normalize(40)}} />
       <SuccessModal
         dispatch={orderCreated}

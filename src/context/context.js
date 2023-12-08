@@ -1,9 +1,12 @@
 import {storage} from '@/shared/helpers';
 import React, {createContext} from 'react';
 import {ToastAndroid} from 'react-native';
-import {createOrder} from '@/shared/helpers/services/orders';
+import {createOrder, uploadFile} from '@/shared/helpers/services/orders';
 import Toast from 'react-native-toast-message';
 import {useNavigation} from '@react-navigation/native';
+import {PAYMENT_METHODS} from '@/shared/constants/global';
+import {v4 as uuidv4} from 'uuid';
+import {mutate} from 'swr';
 
 export const StoreContext = createContext();
 
@@ -16,6 +19,8 @@ export const StoreProvider = ({children}) => {
   const [pending, setPending] = React.useState(0);
   const [paymentMethod, setPaymentMethod] = React.useState(null);
   const [orderCreated, setOrderCreated] = React.useState(false);
+  const [imageVoucher, setImageVoucher] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const getLocalUser = async () => {
     const user = await storage.get('user');
@@ -130,6 +135,7 @@ export const StoreProvider = ({children}) => {
     setTotal(0);
     setPending(0);
     setPaymentMethod(null);
+    setImageVoucher(null);
   };
 
   const handleSubmitOrder = async () => {
@@ -144,18 +150,84 @@ export const StoreProvider = ({children}) => {
       });
       return;
     }
+
+    if (
+      (paymentMethod.title === PAYMENT_METHODS.TRANSFER ||
+        paymentMethod.title === PAYMENT_METHODS.MIX) &&
+      !imageVoucher
+    ) {
+      ToastAndroid.show(
+        'Debe agregar el comprobante de pago',
+        ToastAndroid.SHORT,
+      );
+      Toast.show({
+        type: 'error',
+        text1: 'Debe agregar el comprobante de pago',
+      });
+      return;
+    }
+
+    if (
+      paymentMethod.title === PAYMENT_METHODS.MIX &&
+      (!pending || pending === 0)
+    ) {
+      ToastAndroid.show(
+        'Debe agregar el monto a pagar en efectivo',
+        ToastAndroid.SHORT,
+      );
+      Toast.show({
+        type: 'error',
+        text1: 'Debe agregar el monto a pagar en efectivo',
+      });
+      return;
+    }
+    setIsLoading(true);
+    let imagePath = '';
+    if (
+      paymentMethod.title === PAYMENT_METHODS.TRANSFER ||
+      paymentMethod.title === PAYMENT_METHODS.MIX
+    ) {
+      const imageName = uuidv4();
+      const formData = new FormData();
+      formData.append('file', {
+        uri: imageVoucher.uri,
+        name: `${imageName}-${imageVoucher.fileName}`,
+        type: imageVoucher.type,
+      });
+      const {data: imageData, error: imageError} = await uploadFile(
+        imageName,
+        formData,
+      );
+      imagePath = imageData?.path;
+
+      if (imageError) {
+        console.log('Falla aqui');
+        ToastAndroid.show(
+          'La orden no ha podido ser procesada',
+          ToastAndroid.SHORT,
+        );
+        Toast.show({
+          type: 'error',
+          text1: 'La orden no ha podido ser procesada',
+        });
+        return;
+      }
+    }
+
     let order = {
       products: cart,
       user_id: user.id,
       payment_method: paymentMethod.title,
       payment_pending: pending,
       total,
+      voucher_url: imagePath ?? '',
       status: 'procesando',
     };
 
     const {error, data} = await createOrder(order);
 
     if (error) {
+      console.log('Falla aqui 2', error);
       ToastAndroid.show(
         'La orden no ha podido ser procesada',
         ToastAndroid.SHORT,
@@ -164,7 +236,9 @@ export const StoreProvider = ({children}) => {
       return;
     }
 
+    mutate('/orders');
     setOrderCreated(true);
+    setIsLoading(false);
     resetCart();
   };
 
@@ -194,8 +268,12 @@ export const StoreProvider = ({children}) => {
         setPaymentMethod: paymentMethod => setPaymentMethod(paymentMethod),
         pending,
         setPending: pending => setPending(pending),
+        isLoading,
+        setIsLoading: isLoading => setIsLoading(isLoading),
         orderCreated,
         setOrderCreated: orderCreated => setOrderCreated(orderCreated),
+        imageVoucher,
+        setImageVoucher: imageVoucher => setImageVoucher(imageVoucher),
         handleAddItem: item => handleAddItem(item),
         handleRemoveItem: item => handleRemoveItem(item),
         handleIncrementItem: item => handleIncrementItem(item),

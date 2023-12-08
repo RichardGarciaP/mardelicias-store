@@ -18,7 +18,6 @@ const SuccessModal = ({
   const {width, height} = useWindowDimensions();
   const modalWidth = width - 40;
   const modalHeight = height - 300;
-  console.log(dispatch);
   return (
     <Modal animationType="fade" transparent={true} visible={dispatch}>
       <View style={styles.centeredView}>

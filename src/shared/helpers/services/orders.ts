@@ -1,6 +1,7 @@
 import {PostgrestSingleResponse} from '@supabase/supabase-js';
 import {supabase} from './client';
 import {Order} from '@/shared/DTO';
+import {FileObject} from '@supabase/storage-js';
 
 export const getOrders = async (
   user_id: string,
@@ -15,3 +16,6 @@ export const getOrders = async (
 
 export const createOrder = async (order: any) =>
   await supabase.from('orders').insert({...order});
+
+export const uploadFile = async (name: string, file: any) =>
+  await supabase.storage.from('vouchers').upload(`${name}`, file);

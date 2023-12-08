@@ -37,8 +37,6 @@ const NewAddress = () => {
   });
 
   const onRegionChangeComplete = (change: Region) => {
-    console.log(change);
-
     setRegion(change);
   };
 

@@ -63,7 +63,7 @@ export const _styles = (isDarkMode: boolean) =>
       justifyContent: 'center',
     },
     cantText: {
-      color: semantic.text.grey,
+      color: semantic.text.white,
       fontSize: normalize(16),
       fontWeight: '700',
     },

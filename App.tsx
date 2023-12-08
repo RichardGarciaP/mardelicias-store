@@ -72,7 +72,6 @@ function TabNavigation() {
 function App(): JSX.Element {
   async function getTranslate() {
     const ing = await storage.get('language');
-    console.log('ing', ing);
     if (ing) {
       await i18n.changeLanguage(ing);
       return;

@@ -11,6 +11,12 @@ export const ORDER_STATUS_DEFINITIONS = {
   DELIVERED: 'entregado',
 };
 
+export const PAYMENT_METHODS = {
+  TRANSFER: 'Transferencia',
+  CASH: 'Efectivo',
+  MIX: 'Mixto',
+};
+
 export const TAB_LIST = [
   {
     id: ORDER_STATUS_DEFINITIONS.PROCESSING,

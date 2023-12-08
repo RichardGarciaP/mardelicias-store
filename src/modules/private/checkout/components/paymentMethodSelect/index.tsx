@@ -13,6 +13,7 @@ import {Button} from '@/shared/components/buttons';
 import useDarkMode from '@/shared/hooks/useDarkMode';
 import {semantic} from '@/shared/constants/colors';
 import {StoreContext} from '@/context/context';
+import {PAYMENT_METHODS} from '@/shared/constants/global';
 
 export default function PaymentMethodSelect() {
   const {isDarkMode} = useDarkMode();
@@ -68,21 +69,21 @@ export default function PaymentMethodSelect() {
               {
                 id: '1',
                 icon: dolar,
-                title: 'Efectivo',
+                title: PAYMENT_METHODS.CASH,
                 description: 'efectivo',
                 active: false,
               },
               {
                 id: '2',
                 icon: truck,
-                title: 'Transferencia',
+                title: PAYMENT_METHODS.TRANSFER,
                 description: 'transferencia',
                 active: false,
               },
               {
                 id: '3',
                 icon: truck,
-                title: 'Mixto',
+                title: PAYMENT_METHODS.MIX,
                 description: 'mixto',
                 active: false,
               },

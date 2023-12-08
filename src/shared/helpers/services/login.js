@@ -2,7 +2,6 @@ import {USERS_TYPE_DEFINITIONS} from '@/shared/constants/global';
 import {supabase} from './client';
 
 export const signInWithEmail = async ({email, password}) => {
-  console.log(await supabase.auth.signInWithPassword({email, password}));
   return await supabase.auth.signInWithPassword({email, password});
 };
 

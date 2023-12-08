@@ -71,8 +71,6 @@ export default function CreateAccount() {
   const {navigate} = useNavigation<NavigationProps>();
 
   const onRegionChangeComplete = (change: Region) => {
-    console.log(change);
-
     setRegion(change);
   };
 
@@ -89,7 +87,6 @@ export default function CreateAccount() {
       latitude: region.latitude,
       longitude: region.longitude,
     });
-    console.log(error);
 
     if (error) {
       setErrors({submit: error.message});

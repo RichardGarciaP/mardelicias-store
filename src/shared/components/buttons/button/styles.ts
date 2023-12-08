@@ -21,7 +21,7 @@ export const _styles = (
       justifyContent: 'center',
     },
     text: {
-      color: semantic.text.white,
+      color: disabled ? semantic.text.black : semantic.text.white,
       fontWeight: '700',
       marginHorizontal: normalize(4),
       fontSize: normalize(16),
