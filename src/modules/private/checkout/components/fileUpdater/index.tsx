@@ -5,7 +5,7 @@ import React from 'react';
 import {Text, View, Image, Button} from 'react-native';
 import TitleSection from '../titleSection';
 import {styles} from './styles';
-import {launchCamera} from 'react-native-image-picker';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Typography from '@/shared/components/typography';
 import {semantic} from '@/shared/constants/colors';
@@ -16,6 +16,19 @@ const FileUpdater = () => {
     React.useContext(StoreContext);
   const takePhoto = () => {
     launchCamera(
+      {
+        mediaType: 'photo',
+        quality: 0.5,
+      },
+      response => {
+        if (response.didCancel) return;
+        if (!response.assets) return;
+        setImageVoucher(response?.assets[0]);
+      },
+    );
+  };
+  const takePhotoFromGallery = () => {
+    launchImageLibrary(
       {
         mediaType: 'photo',
         quality: 0.5,
@@ -72,7 +85,7 @@ const FileUpdater = () => {
         <Text style={styles.textPlane}>- o -</Text>
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={takePhoto}
+          onPress={takePhotoFromGallery}
           style={styles.button}>
           <Text style={styles.textButton}>Subir imagen</Text>
         </TouchableOpacity>

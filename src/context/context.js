@@ -35,7 +35,7 @@ export const StoreProvider = ({children}) => {
   };
 
   const getTotal = () => {
-    let newTotal = total;
+    let newTotal = 0;
     if (cart && cart?.length > 0) {
       cart.forEach(currentItem => {
         newTotal = newTotal + currentItem.qty * currentItem.price;
@@ -215,6 +215,8 @@ export const StoreProvider = ({children}) => {
       }
     }
 
+    console.log(user?.user_metadata);
+
     let order = {
       products: cart,
       user_id: user.id,
@@ -223,8 +225,8 @@ export const StoreProvider = ({children}) => {
       total,
       voucher_url: imagePath ?? '',
       status: 'procesando',
-      latitude: user.user_metadata ? user.user_metadata.latitude : 0,
-      longitude: user.user_metadata ? user.user_metadata.longitude : 0,
+      latitude: user?.user_metadata?.latitude,
+      longitude: user?.user_metadata?.longitude,
     };
 
     const {error, data} = await createOrder(order);
@@ -247,7 +249,6 @@ export const StoreProvider = ({children}) => {
 
   React.useEffect(() => {
     getLocalUser();
-    getTotal();
   }, []);
 
   React.useEffect(() => {
