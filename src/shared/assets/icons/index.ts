@@ -50,3 +50,6 @@ export {default as map} from './maps.png';
 export {default as applePay} from './apple_pay.png';
 export {default as mastercard} from './mastercard.png';
 export {default as send} from './Send.png';
+export {default as bank} from './bank.png';
+export {default as bankCash} from './bank_cash.png';
+export {default as cash} from './cash.png';

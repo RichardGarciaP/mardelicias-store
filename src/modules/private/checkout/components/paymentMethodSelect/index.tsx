@@ -1,6 +1,14 @@
 import React, {useState} from 'react';
 import Select from '@/modules/private/checkout/components/select';
-import {arrowBack, creditCardPlus, dolar, truck} from '@/shared/assets/icons';
+import {
+  arrowBack,
+  bank,
+  bankCash,
+  cash,
+  creditCardPlus,
+  dolar,
+  truck,
+} from '@/shared/assets/icons';
 import ButtonSheet from '@/shared/components/buttonSheet';
 import {TouchableOpacity, View} from 'react-native';
 import {normalize} from '@/shared/helpers';
@@ -68,21 +76,21 @@ export default function PaymentMethodSelect() {
             options={[
               {
                 id: '1',
-                icon: dolar,
+                icon: cash,
                 title: PAYMENT_METHODS.CASH,
                 description: 'efectivo',
                 active: false,
               },
               {
                 id: '2',
-                icon: truck,
+                icon: bank,
                 title: PAYMENT_METHODS.TRANSFER,
                 description: 'transferencia',
                 active: false,
               },
               {
                 id: '3',
-                icon: truck,
+                icon: bankCash,
                 title: PAYMENT_METHODS.MIX,
                 description: 'mixto',
                 active: false,

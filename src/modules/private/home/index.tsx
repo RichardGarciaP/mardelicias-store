@@ -15,7 +15,16 @@ import {StoreContext} from '@/context/context';
 import {normalize} from '@/shared/helpers';
 
 export default function Home() {
-  const {data: products, error, isLoading, isValidating} = useProducts();
+  const {
+    data: products,
+    error,
+    isLoading,
+    isValidating,
+    favoritesData,
+    favoritesError,
+    isLoadingFavorites,
+    isValidatingFavorites,
+  } = useProducts();
   const {user} = React.useContext(StoreContext);
 
   return (
@@ -51,10 +60,10 @@ export default function Home() {
               },
             ]}
           />
-          {products && !isLoading && !isValidating && (
+          {favoritesData && !isLoadingFavorites && !isValidatingFavorites && (
             <>
               <View style={{height: normalize(20)}} />
-              <ProductsSlider data={products} />
+              <ProductsSlider data={favoritesData} />
             </>
           )}
 

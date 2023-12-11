@@ -1,20 +1,11 @@
 import React from 'react';
 import List from '@/shared/components/list';
-import {View, useWindowDimensions} from 'react-native';
-import CardProduct from '@/shared/components/cardProduct';
+import {FlatList, SafeAreaView, Text, View} from 'react-native';
 import Typography from '@/shared/components/typography';
 import {styles} from './styles';
-import { getProducts } from '@/shared/helpers/services/products';
-import useProducts from '@/shared/hooks/useProducts';
+import CardProductFull from '@/shared/components/cardProductFull';
 
 export default function MostPopular({products}) {
-
-  const {height, width} = useWindowDimensions();
-
-  function renderItem(item, key) {
-    return <CardProduct product={item} key={key}  width={(width/2) - 35} height={(height / 3) -80} imageHeight={103}/>;
-  }
-
   return (
     <View>
       <Typography style={styles.titleSection}>Productos</Typography>
@@ -23,7 +14,16 @@ export default function MostPopular({products}) {
           Productos no disponibles
         </Typography>
       ) : (
-        <List between data={products} rows={2} renderItem={renderItem}/>
+        <SafeAreaView>
+          <FlatList
+            data={products}
+            numColumns={2}
+            keyExtractor={product => product.id}
+            renderItem={({item}) => (
+              <CardProductFull product={item} imageHeight={103} />
+            )}
+          />
+        </SafeAreaView>
       )}
     </View>
   );
