@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Image, ToastAndroid, TouchableOpacity, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Image, ToastAndroid, TouchableOpacity, View, Text} from 'react-native';
 import Wrapper from '@/shared/components/wrapper';
 import HeaderWithIcon from '@/shared/components/headerBack';
 import Icon from '@/shared/components/icon';
@@ -21,11 +21,10 @@ import {Formik, FormikHelpers, FormikProps} from 'formik';
 import {StoreContext} from '@/context/context';
 import * as Yup from 'yup';
 import {dniRegExp} from '@/shared/constants/global';
-import {EditUser, NewUser} from '@/shared/DTO';
+import {NewUser} from '@/shared/DTO';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProps} from '@/shared/routes/stack';
-import {createUser, updateUser} from '@/shared/helpers/services/login';
-import TitleAuth from '@/shared/components/titleAuth';
+import {updateUser} from '@/shared/helpers/services/login';
 import {storage} from '@/shared/helpers';
 
 const EditProfile = () => {
@@ -63,6 +62,16 @@ const EditProfile = () => {
     direction_detail: Yup.string(),
   });
 
+  const [initials, setInitials] = useState('NA');
+
+  useEffect(() => {
+    setInitials(
+      `${user?.user_metadata?.first_name?.charAt(
+        0,
+      )} ${user?.user_metadata?.last_name?.charAt(0)}`,
+    );
+  }, [user]);
+
   const onSubmit = async (
     values: NewUser,
     {setErrors, setStatus, setSubmitting, resetForm}: FormikHelpers<NewUser>,
@@ -92,13 +101,7 @@ const EditProfile = () => {
         <View style={styles.container}>
           <HeaderWithIcon title="Editar Perfil" />
           <View style={styles.imageContainer}>
-            <Image
-              style={styles.image}
-              source={{uri: 'https://i.ibb.co/hZqwx78/049-girl-25.png'}}
-            />
-            <TouchableOpacity style={styles.editImage}>
-              <Icon icon={edit} />
-            </TouchableOpacity>
+            <Text style={styles.textItem}>{initials}</Text>
           </View>
           <View style={styles.formContainer}>
             <Formik

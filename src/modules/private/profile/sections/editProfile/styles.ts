@@ -1,3 +1,4 @@
+import {palette, semantic} from '@/shared/constants/colors';
 import {normalize} from '@/shared/helpers';
 import {StyleSheet} from 'react-native';
 
@@ -13,17 +14,16 @@ export const styles = StyleSheet.create({
     width: normalize(180),
     height: normalize(180),
     marginRight: normalize(12),
+    backgroundColor: palette.main.p500,
+    borderRadius: 100,
+    color: semantic.text.white,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  image: {
-    width: '100%',
-    height: '100%',
-  },
-  editImage: {
-    position: 'absolute',
-    bottom: 0,
-    right: normalize(30),
-    backgroundColor: '#FFF',
-    borderRadius: normalize(8),
+  textItem: {
+    fontSize: normalize(60),
+    fontWeight: '700',
+    color: semantic.text.white,
   },
   formContainer: {
     marginVertical: normalize(30),
