@@ -6,6 +6,9 @@ import {styles} from './styles';
 import CardProductFull from '@/shared/components/cardProductFull';
 
 export default function MostPopular({products}) {
+  function renderItem(item, key) {
+    return <CardProductFull key={key} product={item} imageHeight={103} />;
+  }
   return (
     <View>
       <Typography style={styles.titleSection}>Productos</Typography>
@@ -14,16 +17,7 @@ export default function MostPopular({products}) {
           Productos no disponibles
         </Typography>
       ) : (
-        <SafeAreaView>
-          <FlatList
-            data={products}
-            numColumns={2}
-            keyExtractor={product => product.id}
-            renderItem={({item}) => (
-              <CardProductFull product={item} imageHeight={103} />
-            )}
-          />
-        </SafeAreaView>
+        <List between data={products} rows={2} renderItem={renderItem} />
       )}
     </View>
   );
