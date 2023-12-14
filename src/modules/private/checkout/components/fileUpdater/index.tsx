@@ -10,10 +10,12 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import Typography from '@/shared/components/typography';
 import {semantic} from '@/shared/constants/colors';
 import {normalize} from '@/shared/helpers';
+import useBanks from '@/shared/hooks/useBanks';
 
 const FileUpdater = () => {
   const {paymentMethod, setPending, imageVoucher, setImageVoucher} =
     React.useContext(StoreContext);
+  const {data: bankData, isLoading, error} = useBanks();
   const takePhoto = () => {
     launchCamera(
       {
@@ -56,18 +58,42 @@ const FileUpdater = () => {
     );
   };
 
-  const transferAccounts = () => {
+  const transferAccounts = ({
+    id_number,
+    account_number,
+    account_name,
+    bank_name,
+    account_type,
+  }: any) => {
     return (
-      <View>
-        <View style={styles.resume}>
-          <View style={styles.containerResumeText}>
-            <Typography>{'Banco Pichincha'}</Typography>
-            <Typography translate={false}>23043434434</Typography>
-          </View>
-          <View style={styles.containerResumeText}>
-            <Typography>{'Banco Guayaquil'}</Typography>
-            <Typography translate={false}>323233232323</Typography>
-          </View>
+      <View style={styles.resume}>
+        <View style={styles.containerResumeText}>
+          <Typography style={styles.textWeigth}>
+            {'Numero de identificación'}
+          </Typography>
+          <Typography translate={false}>{id_number}</Typography>
+        </View>
+        <View style={styles.containerResumeText}>
+          <Typography style={styles.textWeigth}>
+            {'Nombre de la cuenta'}
+          </Typography>
+          <Typography translate={false}>{account_name}</Typography>
+        </View>
+        <View style={styles.containerResumeText}>
+          <Typography style={styles.textWeigth}>
+            {'Numero de cuenta'}
+          </Typography>
+          <Typography translate={false}>{account_number}</Typography>
+        </View>
+        <View style={styles.containerResumeText}>
+          <Typography style={styles.textWeigth}>
+            {'Nombre del Banco'}
+          </Typography>
+          <Typography translate={false}>{bank_name}</Typography>
+        </View>
+        <View style={styles.containerResumeText}>
+          <Typography style={styles.textWeigth}>{'Tipo de cuenta'}</Typography>
+          <Typography translate={false}>{account_type}</Typography>
         </View>
       </View>
     );
@@ -100,7 +126,9 @@ const FileUpdater = () => {
     return (
       <View style={styles.container}>
         <TitleSection title={'Cuentas para transferencia'} showChange={false} />
-        {transferAccounts()}
+        <View style={styles.accounts}>
+          {bankData?.map(bank => transferAccounts(bank))}
+        </View>
         <TitleSection
           title={'Comprobante de transferencia'}
           showChange={false}
@@ -121,7 +149,9 @@ const FileUpdater = () => {
     return (
       <View style={styles.container}>
         <TitleSection title={'Cuentas para transferencia'} showChange={false} />
-        {transferAccounts()}
+        <View style={styles.accounts}>
+          {bankData?.map(bank => transferAccounts(bank))}
+        </View>
         <View style={styles.sectionContainer}>
           <TitleSection title={'Monto en efectivo'} showChange={false} />
           <Input

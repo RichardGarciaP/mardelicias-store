@@ -23,14 +23,18 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: normalize(16),
   },
+  accounts: {
+    marginTop: normalize(10),
+    marginBottom: normalize(10),
+  },
   resume: {
     borderWidth: 2,
     borderColor: semantic.fill.f04,
     borderRadius: normalize(16),
-    paddingVertical: normalize(20),
+    paddingVertical: normalize(16),
     paddingHorizontal: normalize(12),
-    marginTop: normalize(20),
-    marginBottom: normalize(26),
+    marginTop: normalize(10),
+    marginBottom: normalize(10),
   },
   containerResumeText: {
     flexDirection: 'row',
@@ -52,5 +56,8 @@ export const styles = StyleSheet.create({
     color: semantic.text.black,
     fontWeight: '700',
     fontSize: normalize(16),
+  },
+  textWeigth: {
+    fontWeight: '700',
   },
 });
