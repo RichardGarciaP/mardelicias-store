@@ -4,28 +4,14 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {ProductsStore} from '@/shared/DTO';
 import Login from '@/modules/auth/login';
 import CreateAccount from '@/modules/auth/createAccount';
-import EnterOtp from '@/modules/auth/enterOtp';
 import EnterNewPassword from '@/modules/auth/enterNewPassword';
 import ForgotPassword from '@/modules/auth/forgotPassword';
-import Welcome from '@/modules/auth/welcome';
 import DetailPlant from '@/modules/private/detailPlant';
 import PlantList from '@/modules/private/plantList';
-import Favorite from '@/modules/private/home/sections/favorite';
-import Notifications from '@/modules/private/home/sections/notifications';
-import Reviews from '@/modules/private/detailPlant/sections/reviews';
 import Checkout from '@/modules/private/checkout';
 import EditProfile from '@/modules/private/profile/sections/editProfile';
-import Vouchers from '@/modules/private/profile/sections/vouchers';
-
-import NewPayment from '@/modules/private/profile/sections/payments/components/newPayment';
-import Payments from '@/modules/private/profile/sections/payments';
-import Tracking from '@/modules/private/orders/sections/tracking';
-import EReceipt from '@/modules/private/orders/sections/eReceipt';
 
 import NewAddress from '@/modules/private/profile/sections/newAddress';
-import Language from '@/modules/private/profile/sections/language';
-import Conversation from '@/modules/private/conversation';
-import Chats from '@/modules/private/chats';
 
 export type RootStackParamList = {
   tab: undefined;
@@ -76,11 +62,6 @@ const RoutesStack: RouteItem[] = [
     private: false,
   },
   {
-    path: 'enterOtp',
-    component: EnterOtp,
-    private: false,
-  },
-  {
     path: 'enterNewPassword',
     component: EnterNewPassword,
     private: true,
@@ -88,11 +69,6 @@ const RoutesStack: RouteItem[] = [
   {
     path: 'forgotPassword',
     component: ForgotPassword,
-    private: true,
-  },
-  {
-    path: 'welcome',
-    component: Welcome,
     private: true,
   },
   {
@@ -106,21 +82,6 @@ const RoutesStack: RouteItem[] = [
     private: true,
   },
   {
-    path: 'favorites',
-    component: Favorite,
-    private: true,
-  },
-  {
-    path: 'notifications',
-    component: Notifications,
-    private: true,
-  },
-  {
-    path: 'reviews',
-    component: Reviews,
-    private: true,
-  },
-  {
     path: 'checkout',
     component: Checkout,
     private: true,
@@ -131,48 +92,8 @@ const RoutesStack: RouteItem[] = [
     private: true,
   },
   {
-    path: 'vouchers',
-    component: Vouchers,
-    private: true,
-  },
-  {
-    path: 'payments',
-    component: Payments,
-    private: true,
-  },
-  {
-    path: 'tracking',
-    component: Tracking,
-    private: true,
-  },
-  {
-    path: 'eReceipt',
-    component: EReceipt,
-    private: true,
-  },
-  {
-    path: 'newPayment',
-    component: NewPayment,
-    private: true,
-  },
-  {
     path: 'addNewAddress',
     component: NewAddress,
-    private: true,
-  },
-  {
-    path: 'language',
-    component: Language,
-    private: true,
-  },
-  {
-    path: 'chats',
-    component: Chats,
-    private: true,
-  },
-  {
-    path: 'conversation',
-    component: Conversation,
     private: true,
   },
 ];
