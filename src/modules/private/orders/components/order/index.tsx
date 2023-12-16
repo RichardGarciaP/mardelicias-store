@@ -17,6 +17,7 @@ import {NavigationProps} from '@/shared/routes/stack';
 import {format} from 'date-fns';
 // import {updateOrder} from '@/shared/services/orders/orders';
 import {mutate} from 'swr';
+import {normalize} from '@/shared/helpers';
 
 interface OrderProps {
   order: OrderDTOP;
@@ -54,12 +55,19 @@ export default function Order({order, track = true, map = false}: OrderProps) {
               Orden #{order.id}
             </Typography>
           </View>
-          <Typography style={styles.category} translate={false}>
-            Repartidor:{' '}
-            {order?.orders_driver_user_fkey
-              ? `${order?.orders_driver_user_fkey?.first_name} ${order?.orders_driver_user_fkey?.last_name}`
-              : 'No asignado'}
-          </Typography>
+          <View style={{marginVertical: normalize(4)}}>
+            <Typography style={styles.category} translate={false}>
+              Repartidor:{' '}
+              {order?.orders_driver_user_fkey
+                ? `${order?.orders_driver_user_fkey?.first_name} ${order?.orders_driver_user_fkey?.last_name}`
+                : 'No asignado'}
+            </Typography>
+            {order?.orders_driver_user_fkey && (
+              <Typography style={styles.category} translate={false}>
+                Teléfono: `+593 {order?.orders_driver_user_fkey?.phone}
+              </Typography>
+            )}
+          </View>
           <Typography style={styles.category} translate={false}>
             Cantidad de Productos: {qty}
           </Typography>

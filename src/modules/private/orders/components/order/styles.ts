@@ -48,7 +48,7 @@ export const _styles = (isDarkMode: boolean) =>
     category: {
       fontSize: normalize(16),
       color: semantic.text.grey,
-      marginVertical: normalize(8),
+      marginVertical: normalize(4),
     },
     price: {
       fontSize: normalize(20),
