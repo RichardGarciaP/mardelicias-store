@@ -12,7 +12,7 @@
     },
     "forgot_password": {
       "title": "Olvide mi contraseña",
-      "description": "Por favor, introduzca la dirección de correo electrónico asociada a su cuenta."
+      "description": "Por favor, contacte con el administrador para recuperar su cuenta."
     },
     "otp_code": {
       "title": "Ingresa el codigo otp",

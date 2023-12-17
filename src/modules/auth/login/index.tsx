@@ -67,6 +67,9 @@ export default function Login() {
   const navigateToSignup = () => {
     navigation.navigate('createAccount');
   };
+  const navigateRecovery = () => {
+    navigation.navigate('forgotPassword');
+  };
   return (
     <View style={styles.wrapper}>
       <TitleAuth title={'Regresar'} />
@@ -79,8 +82,8 @@ export default function Login() {
         </View>
         <Formik
           initialValues={{
-            email: 'cliente@gmail.com',
-            password: 'qwerty00',
+            email: '',
+            password: '',
             submit: '',
           }}
           validationSchema={validations}
@@ -130,6 +133,15 @@ export default function Login() {
                     </Typography>
                   )}
                 </View>
+              </View>
+              <View style={styles.acccount}>
+                <TouchableWithoutFeedback
+                  style={styles.recoveryAccount}
+                  onPress={navigateRecovery}>
+                  <Text style={styles.recoveryText}>
+                    ¿Olvidaste tu contraseña?
+                  </Text>
+                </TouchableWithoutFeedback>
               </View>
 
               {errors.submit && (

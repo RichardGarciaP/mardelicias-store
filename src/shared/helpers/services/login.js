@@ -4,6 +4,9 @@ import {supabase} from './client';
 export const signInWithEmail = async ({email, password}) => {
   return await supabase.auth.signInWithPassword({email, password});
 };
+export const recoveryPassword = async ({email}) => {
+  return await supabase.auth.resetPasswordForEmail(email);
+};
 
 export const signOut = async () => {
   return await supabase.auth.signOut();

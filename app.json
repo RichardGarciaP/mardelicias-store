@@ -1,6 +1,6 @@
 {
   "name": "Mardelicias Store",
-  "displayName": "Mardelicias Store",
+  "displayName": "Store Mardelicias",
   "permissions":[
     "LOCATION",
     "ACCESS_COARSE_LOCATION",

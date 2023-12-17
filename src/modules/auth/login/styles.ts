@@ -53,4 +53,18 @@ export const styles = StyleSheet.create({
     opacity: 0.5,
     textAlign: 'center',
   },
+  acccount: {
+    width: '100%',
+    marginBottom: normalize(20),
+  },
+  recoveryAccount: {
+    width: '100%',
+    paddingVertical: normalize(4),
+  },
+  recoveryText: {
+    width: '100%',
+    color: palette.main.p500,
+    opacity: 0.5,
+    textAlign: 'right',
+  },
 });
