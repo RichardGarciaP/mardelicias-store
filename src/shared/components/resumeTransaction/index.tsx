@@ -9,16 +9,23 @@ interface ResumeTransaction {
   pending: number;
 }
 
-export default function ResumeTransaction({total, pending}: ResumeTransaction) {
+export default function ResumeTransaction({
+  total,
+  pending = 0,
+}: ResumeTransaction) {
   return (
     <View style={styles.resume}>
-      <View style={styles.containerResumeText}>
-        <Typography>{'Saldo en Efectivo'}</Typography>
-        <Typography translate={false}>{pending.toFixed(2)}</Typography>
-      </View>
+      {pending ? (
+        <View style={styles.containerResumeText}>
+          <Typography>{'Saldo en Efectivo'}</Typography>
+          <Typography translate={false}>{pending}</Typography>
+        </View>
+      ) : (
+        <View></View>
+      )}
       <View style={styles.containerResumeText}>
         <Typography>{'Total'}</Typography>
-        <Typography translate={false}>{total.toFixed(2)}</Typography>
+        <Typography translate={false}>{total?.toFixed(2)}</Typography>
       </View>
     </View>
   );

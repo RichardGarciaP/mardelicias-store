@@ -253,6 +253,10 @@ export const StoreProvider = ({children}) => {
     await updateStock(order.products);
 
     mutate('/orders');
+
+    mutate('/products');
+    mutate('/products/favorites');
+
     setOrderCreated(true);
     setIsLoading(false);
     resetCart();

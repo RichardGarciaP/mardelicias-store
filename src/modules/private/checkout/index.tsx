@@ -16,6 +16,7 @@ import SuccessModal from './components/successModal';
 import {useNavigation} from '@react-navigation/native';
 import {NavigationProps} from '@/shared/routes/stack';
 import FileUpdater from './components/fileUpdater';
+import {mutate} from 'swr';
 
 export default function Checkout() {
   const {isDarkMode} = useDarkMode();
@@ -32,6 +33,8 @@ export default function Checkout() {
 
   const handleOnSuccessOrder = () => {
     setOrderCreated(false);
+    mutate('/products');
+    mutate('/products/favorites');
     navigate('orders');
   };
 
