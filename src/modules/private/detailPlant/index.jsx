@@ -29,13 +29,12 @@ export default function DetailPlant({route}) {
   useEffect(() => {
     if (cart && cart.length > 0 && product) {
       const currentProduct = cart.find(item => item.id === product.id);
-      console.log('entra');
 
       if (currentProduct) {
-        console.log('Existe');
-
         setIsDisabled(
-          product.stock <= currentProduct.qty || quantity >= product.stock,
+          product.stock <= currentProduct.qty ||
+            quantity >= product.stock ||
+            product.qty >= product.stock,
         );
       }
     } else if (product) {

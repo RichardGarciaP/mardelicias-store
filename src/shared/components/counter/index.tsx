@@ -15,9 +15,14 @@ export enum TypeChange {
 interface CounterProps {
   cant?: number;
   product?: Product;
+  isDisabled?: boolean;
 }
 
-export default function Counter({cant = 1, product}: CounterProps) {
+export default function Counter({
+  cant = 1,
+  product,
+  isDisabled = false,
+}: CounterProps) {
   const [count, setCounter] = useState(cant);
   const {handleIncrementItem, handleDecrementItem} =
     React.useContext(StoreContext);
@@ -28,13 +33,15 @@ export default function Counter({cant = 1, product}: CounterProps) {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => handleDecrementItem(product)}
-        style={styles.btnReduce}>
+        disabled={product.qty === 1}
+        style={{...styles.btnReduce, opacity: product.qty === 1 ? 0.5 : 1}}>
         <Icon customStyles={styles.minus} icon={Minus} />
       </TouchableOpacity>
       <Typography style={styles.value}>{String(product.qty)}</Typography>
       <TouchableOpacity
         onPress={() => handleIncrementItem(product)}
-        style={styles.btnAument}>
+        disabled={isDisabled}
+        style={{...styles.btnAument, opacity: isDisabled ? 0.5 : 1}}>
         <Icon customStyles={styles.plus} icon={Plus} />
       </TouchableOpacity>
     </View>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, TouchableOpacity, View} from 'react-native';
 import Typography from '@/shared/components/typography';
 import {currencyType} from '@/shared/constants/global';
@@ -10,6 +10,7 @@ import Counter from '@/shared/components/counter';
 import Icon from '@/shared/components/icon';
 import {trash} from '@/shared/assets/icons';
 import {Product} from '@/shared/DTO';
+import {StoreContext} from '@/context/context';
 
 interface CardProductHorizontalProps {
   product?: Product;
@@ -27,6 +28,9 @@ export default function CardProductHorizontal({
   const {isDarkMode} = useDarkMode();
   const styles = _styles(isDarkMode);
   const [cant, setCant] = useState(1);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const {cart} = React.useContext(StoreContext);
+
   const navigation = useNavigation<NavigationProps>();
 
   function navigateTo() {
@@ -42,6 +46,21 @@ export default function CardProductHorizontal({
       },
     });
   }
+
+  useEffect(() => {
+    if (cart && cart.length > 0 && product) {
+      const currentProduct = cart.find(
+        (item: Product) => item.id === product.id,
+      );
+      console.log('entra');
+
+      if (currentProduct) {
+        console.log('Existe');
+
+        setIsDisabled(product.stock <= currentProduct.qty);
+      }
+    }
+  }, [cart, product]);
 
   if (!product) return null;
 
@@ -91,7 +110,7 @@ export default function CardProductHorizontal({
 
         {actions && (
           <View style={styles.actions}>
-            <Counter product={product} />
+            <Counter product={product} isDisabled={isDisabled} />
             <Typography style={styles.totalPrice} translate={false}>
               {currencyType} {(product!.price * product.qty).toFixed(2)}
             </Typography>
