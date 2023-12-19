@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import {styles} from './styles';
 import Typography from '@/shared/components/typography';
@@ -14,15 +14,19 @@ export enum TypeChange {
 
 interface CounterProps {
   cant?: number;
+  quantity: number;
   product?: Product;
+  isDisabled?: boolean;
   setQuantity?: (quantity: number) => void;
 }
 
 export default function CounterAdd({
   product,
   setQuantity = () => {},
+  quantity,
+  isDisabled = false,
 }: CounterProps) {
-  const {handleAddItem} = React.useContext(StoreContext);
+  const {handleAddItem, cart} = React.useContext(StoreContext);
 
   if (!product) return null;
 
@@ -30,13 +34,15 @@ export default function CounterAdd({
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => setQuantity(product.qty - 1)}
-        style={styles.btnReduce}>
+        disabled={product.qty === 1}
+        style={{...styles.btnReduce, opacity: product.qty === 1 ? 0.5 : 1}}>
         <Icon customStyles={styles.minus} icon={Minus} />
       </TouchableOpacity>
       <Typography style={styles.value}>{String(product.qty)}</Typography>
       <TouchableOpacity
         onPress={() => setQuantity(product.qty + 1)}
-        style={styles.btnAument}>
+        disabled={isDisabled}
+        style={{...styles.btnAument, opacity: isDisabled ? 0.5 : 1}}>
         <Icon customStyles={styles.plus} icon={Plus} />
       </TouchableOpacity>
     </View>

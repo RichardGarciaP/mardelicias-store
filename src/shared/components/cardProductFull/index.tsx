@@ -44,16 +44,20 @@ export default function CardProductFull({product, imageHeight = 120}: Props) {
 
         <View style={styles.descriptionContainer}>
           <Typography style={styles.name} translate={false}>
-            {product.name}
+            {product.name} {`(${product.stock})`}
           </Typography>
           <Typography style={styles.price} translate={false}>
             {currencyType} {product?.price}
           </Typography>
-          <Button
-            title={'Agregar'}
-            onPress={() => handleAddItem({...product, qty: 1})}
-            sm
-          />
+          {product.stock > 0 ? (
+            <Button
+              title={'Agregar'}
+              onPress={() => handleAddItem({...product, qty: 1})}
+              sm
+            />
+          ) : (
+            <Button title={'Agotado'} onPress={() => {}} disabled sm />
+          )}
         </View>
       </View>
     </TouchableOpacity>

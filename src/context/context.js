@@ -56,6 +56,10 @@ export const StoreProvider = ({children}) => {
     const itemExist = cart.find(currentItem => currentItem.id === item.id);
 
     if (itemExist) {
+      if (itemExist.stock < itemExist.qty + item.qty) {
+        ToastAndroid.show('Existencias insuficientes', ToastAndroid.SHORT);
+        return;
+      }
       newCart = cart.map(currentItem => {
         if (currentItem.id === item.id) {
           return {
