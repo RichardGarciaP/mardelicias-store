@@ -182,6 +182,14 @@ export const StoreProvider = ({children}) => {
       });
       return;
     }
+
+    if (paymentMethod.title === PAYMENT_METHODS.MIX && pending >= total) {
+      ToastAndroid.show(
+        'El monto a pagar en efectivo debe ser menor al total',
+        ToastAndroid.SHORT,
+      );
+      return;
+    }
     setIsLoading(true);
     let imagePath = '';
     if (
@@ -214,8 +222,6 @@ export const StoreProvider = ({children}) => {
         return;
       }
     }
-
-    console.log(user?.user_metadata);
 
     let order = {
       products: cart,

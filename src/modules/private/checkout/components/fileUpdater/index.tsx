@@ -66,7 +66,7 @@ const FileUpdater = () => {
     account_type,
   }: any) => {
     return (
-      <View style={styles.resume}>
+      <View style={styles.resume} key={'key' + id_number}>
         <View style={styles.containerResumeText}>
           <Typography style={styles.textWeigth}>
             {'Numero de identificación'}
