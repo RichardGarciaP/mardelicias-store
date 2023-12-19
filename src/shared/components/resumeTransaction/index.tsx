@@ -13,7 +13,7 @@ export default function ResumeTransaction({total, pending}: ResumeTransaction) {
   return (
     <View style={styles.resume}>
       <View style={styles.containerResumeText}>
-        <Typography>{'Pendiente'}</Typography>
+        <Typography>{'Saldo en Efectivo'}</Typography>
         <Typography translate={false}>{pending}</Typography>
       </View>
       <View style={styles.containerResumeText}>
