@@ -52,11 +52,8 @@ export default function CardProductHorizontal({
       const currentProduct = cart.find(
         (item: Product) => item.id === product.id,
       );
-      console.log('entra');
 
       if (currentProduct) {
-        console.log('Existe');
-
         setIsDisabled(product.stock <= currentProduct.qty);
       }
     }
