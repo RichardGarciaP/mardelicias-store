@@ -14,11 +14,11 @@ export default function ResumeTransaction({total, pending}: ResumeTransaction) {
     <View style={styles.resume}>
       <View style={styles.containerResumeText}>
         <Typography>{'Saldo en Efectivo'}</Typography>
-        <Typography translate={false}>{pending}</Typography>
+        <Typography translate={false}>{pending.toFixed(2)}</Typography>
       </View>
       <View style={styles.containerResumeText}>
         <Typography>{'Total'}</Typography>
-        <Typography translate={false}>{total}</Typography>
+        <Typography translate={false}>{total.toFixed(2)}</Typography>
       </View>
     </View>
   );
