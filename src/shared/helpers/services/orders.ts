@@ -1,6 +1,6 @@
 import {PostgrestSingleResponse} from '@supabase/supabase-js';
 import {supabase} from './client';
-import {Order} from '@/shared/DTO';
+import {Order, Product} from '@/shared/DTO';
 import {FileObject} from '@supabase/storage-js';
 
 export const getOrders = async (

@@ -7,6 +7,7 @@ import {useNavigation} from '@react-navigation/native';
 import {PAYMENT_METHODS} from '@/shared/constants/global';
 import {v4 as uuidv4} from 'uuid';
 import {mutate} from 'swr';
+import {updateStock} from '@/shared/helpers/services/products';
 
 export const StoreContext = createContext();
 
@@ -214,7 +215,6 @@ export const StoreProvider = ({children}) => {
       imagePath = imageData?.path;
 
       if (imageError) {
-        console.log('Falla aqui');
         ToastAndroid.show(
           'La orden no ha podido ser procesada',
           ToastAndroid.SHORT,
@@ -242,7 +242,6 @@ export const StoreProvider = ({children}) => {
     const {error, data} = await createOrder(order);
 
     if (error) {
-      console.log('Falla aqui 2', error);
       ToastAndroid.show(
         'La orden no ha podido ser procesada',
         ToastAndroid.SHORT,
@@ -250,6 +249,8 @@ export const StoreProvider = ({children}) => {
       Toast.show({type: 'error', text1: 'La orden no ha podido ser procesada'});
       return;
     }
+
+    await updateStock(order.products);
 
     mutate('/orders');
     setOrderCreated(true);

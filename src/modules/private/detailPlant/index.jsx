@@ -24,6 +24,7 @@ export default function DetailPlant({route}) {
 
   const addToCart = () => {
     handleAddItem({...product, qty: quantity});
+    navigate('shop');
   };
 
   useEffect(() => {
@@ -34,7 +35,8 @@ export default function DetailPlant({route}) {
         setIsDisabled(
           product.stock <= currentProduct.qty ||
             quantity >= product.stock ||
-            product.qty >= product.stock,
+            product.qty >= product.stock ||
+            product.stock - currentProduct.qty < quantity,
         );
       }
     } else if (product) {
