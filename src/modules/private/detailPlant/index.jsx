@@ -40,7 +40,7 @@ export default function DetailPlant({route}) {
         );
       }
     } else if (product) {
-      setIsDisabled(quantity >= product.stock);
+      setIsDisabled(quantity > product.stock);
     }
   }, [cart, product, quantity]);
 
