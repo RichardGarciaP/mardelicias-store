@@ -116,6 +116,12 @@ const Profile = () => {
                   leftIcon: <Icon icon={location} />,
                   onPress: () => navigateToNewAddress(),
                 },
+                // {
+                //   name: 'Contactanos',
+                //   description: user?.user_metadata?.direction,
+                //   leftIcon: <Icon icon={location} />,
+                //   onPress: () => navigateToNewAddress(),
+                // },
                 {
                   name: 'profile.logout',
                   leftIcon: <Icon icon={logout} />,

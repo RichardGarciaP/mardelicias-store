@@ -13,6 +13,7 @@ import useProducts from '@/shared/hooks/useProducts';
 import ProductsSlider from '@/shared/components/productsSliders';
 import {StoreContext} from '@/context/context';
 import {normalize} from '@/shared/helpers';
+import Contact from './components/contact';
 
 export default function Home() {
   const {
@@ -73,6 +74,10 @@ export default function Home() {
               <MostPopular products={products} />
             </>
           )}
+          <View>
+            <View style={{height: normalize(20)}} />
+            <Contact />
+          </View>
         </View>
       </ScrollView>
     </Wrapper>
