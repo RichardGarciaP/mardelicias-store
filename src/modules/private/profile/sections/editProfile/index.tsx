@@ -127,6 +127,7 @@ const EditProfile = () => {
                 submitForm,
                 touched,
                 values,
+                setFieldValue,
               }: FormikProps<NewUser>) => (
                 <View>
                   <View style={styles.form}>
@@ -134,8 +135,13 @@ const EditProfile = () => {
                       <Input
                         label="Numero de Cédula"
                         placeholder="13xxxxxxxx"
-                        onChangeText={handleChange('dni')}
+                        onChangeText={text => {
+                          if (text.length <= 10) {
+                            setFieldValue('dni', text);
+                          }
+                        }}
                         value={values.dni}
+                        keyboardType="number-pad"
                       />
                       {touched.dni && errors.dni && (
                         <Typography style={styles.textError}>
